@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>wtf_fetch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--
+    <script src="../../wtf_wikipedia_kelly/builds/wtf_wikipedia.js"></script>
+    <script src="js/writedom.js"></script>
+    -->
+    <script src="../docs/js/wtf_fetch.js"></script>
+    <script src="../builds/wtf_tokenizer.js"></script>
+  </head>
+  <body style="margin:10px;background:#C0C0C0">
+    <script>
+    // check if wtf_fetch is accessible in browser
+    if (window.hasOwnProperty("wtf_fetch")) {
+        if (wtf_fetch.version) {
+        console.log("VERSION: wtf_fetch "+wtf_fetch.version);
+        for (var id in wtf_fetch) {
+          if (wtf_fetch.hasOwnProperty(id)) {
+            console.log(" wtf_fetch." + id + " type: "+typeof(wtf_fetch[id]));
+          }
+        };
+      };
+    } else {
+      console.log("Module 'wtf_fetch' does not exist or was not loaded!");
+    }
+
+    // check if wtf_tokenizer is accessible in browser
+    if (window.hasOwnProperty("wtf_tokenizer")) {
+      if (wtf_tokenizer.version) {
+        console.log("VERSION: wtf_tokenizer "+wtf_tokenizer.version);
+        top.wtf_tokenizer = wtf_tokenizer;
+      };
+    } else {
+      console.log("Module 'wtf_tokenizer' does not exist or was not loaded!");
+    }
+      function el(pID) {
+        return document.getElementById(pID)
+      };
+
+      function setWikiID() {
+        el("wikiid").value = el("sWikiLanguage").value + el("sWikiDomain").value
+      };
+
+      function callWikiDisplay() {
+        var vURL = "https://"+el("sWikiLanguage").value + "." + el("sWikiDomain").value+".org/wiki/";
+        vURL += encodeURI(el("wikiarticle").value);
+        document.location.href=vURL;
+      };
+
+      function callWikiDownload() {
+          downloadWikiDoc(el("wikiarticle").value,el("sWikiLanguage").value,el("sWikiDomain").value);
+      };
+
+      function downloadWikiDoc(pArticle,pLang,pDomain) {
+        console.log("Call: wtf_fetch.getPage('" + pArticle + "','" + pLang + "','" + pDomain + "')");
+        wtf_fetch.getPage(pArticle, pLang, pDomain, function(err, doc){// Callback function after success
+        //wtf.fetch("Water", "en" , function(err, doc){// Callback function after success
+          if (err) {
+            console.error("Error wtf_fetch: "+err);
+          } else {
+            if (doc) {
+              if (doc.hasOwnProperty("wiki")) {
+                var markup = doc.wiki;
+                console.log("LOG (PlainText result): "+markup);
+                // store markup result in textarea
+                document.getElementById("wikimarkup").value = doc.wiki;
+                // store revealJS result in textarea
+                var markup = doc.wiki;
+                var vTitle = el("wikiarticle").value;
+                var vLanguage = el("sWikiLanguage").value;
+                var vDomain = el("sWikiDomain").value;
+                // store JSON parse result in textarea
+                document.getElementById("wikijson").value = JSON.stringify(doc,null,4);
+              } else {
+                console.log("JSON doc="+JSON.stringify(doc,null,2));
+              }
+            } else {
+              console.error("Return 'doc' in getPage()-callback is not defined!");
+            }
+          }
+
+        })
+      }
+
+
+      function tokenize_math() {
+        var wiki_src = el("tWikiSource").value;
+        wtf_tokenizer.math(wiki_src)
+        el("tWikiSource").value = wiki_src;
+      }
+
+      function tokenize_citation() {
+        var wiki_src = el("tWikiSource").value;
+        wtf_tokenizer.citation(wiki_src)
+        el("tWikiSource").value = wiki_src;
+      }
+
+    </script>
+    <hr>
+      <center>
+        <h2>WTF Fetch Download Tool</h2>
+        Library NPM: <a href="https://www.npmjs.com/package/wtf_fetch" target="_blank">wtf_fetch NPM</a>
+
+      </center>
+    <hr>
+    <b>Wiki:</b>
+    <select id="sWikiDomain" onchange="setWikiID()">
+      <option value="wikiversity" selected>Wikiversity</option>
+      <option value="wikipedia">Wikipedia</option>
+      <option value="wikibook">WikiBook</option>
+      <option value="wiktionary">Wikionary</option>
+      <option value="wikiquote">WikiQuote</option>
+      <option value="wikisource">WikiSource</option>
+    </select>
+    &nbsp;&nbsp;
+    <b>Language:</b>
+    <select id="sWikiLanguage" onchange="setWikiID()">
+      <option value="en"  selected="selected">English</option>
+      <option value="es">Spanish</option>
+      <option value="de">German</option>
+      <option value="fr">French</option>
+      <option value="it">Italian</option>
+      <option value="nl">Dutch</option>
+      <option value="ja">Japanese</option>
+      <option value="pl">Polish</option>
+      <option value="ru">Russian</option>
+      <option value="sv">Swedish</option>
+      <option value="vi">Vietnamese</option>
+      <option value="ar">Arabic</option>
+      <option value="id">Indonesian</option>
+      <option value="ms">Malay</option>
+      <option value="ca">Catalan</option>
+      <option value="cs">Czech</option>
+      <option value="eu">Basque</option>
+      <option value="fa">Persian</option>
+      <option value="ko">Korean</option>
+      <option value="hu">Hungarian</option>
+      <option value="no">Norwegian</option>
+      <option value="pt">Portuguese</option>
+      <option value="ro">Romanian</option>
+      <option value="sr">Serbian</option>
+      <option value="sh">Serbo-Croatian</option>
+      <option value="fi">Finnish</option>
+      <option value="tr">Turkish</option>
+      <option value="uk">Ukrainian</option>
+      <option value="zh">Chinese</option>
+      <option value="bs">Bosnian</option>
+      <option value="bg">Bulgarian</option>
+      <option value="da">Danish</option>
+      <option value="et">Estonian</option>
+      <option value="el">Greek</option>
+      <option value="eo">Esperanto</option>
+      <option value="gl">Galician</option>
+      <option value="he">Hebrew</option>
+      <option value="hr">Croatian</option>
+      <option value="lv">Latvian</option>
+      <option value="lt">Lithuanian</option>
+      <option value="nn">Norwegian Nynorsk</option>
+      <option value="sk">Slovak</option>
+      <option value="sl">Slovenian</option>
+      <option value="th">Thai</option>
+    </select>
+    &nbsp;&nbsp;
+    <b>Article:</b>
+    <input type="text" id="wikiarticle" value="3D Modelling" size="45">
+    <input type="button" id="bOpenWiki" value="Open Wiki" onclick="callWikiDisplay()">
+    <input type="button" id="bDownloadWiki" value="Download" onclick="callWikiDownload()">
+    <input type="text" id="wikiid" value="enwikiversity" style="display:none">
+    <hr>
+    <b>Download Wiki-Markup:</b>
+    <input type="button" id="bTokenizeMath" value="Tokenize Math" onclick="tokenize_math()" style="color:red">
+    <input type="button" id="bTokenizeCitation" value="Tokenize Citation" onclick="tokenize_citation()" style="color:red">
+    <br>
+    <textarea id="wikimarkup" rows="12" cols="120">
+    </textarea>
+    <hr>
+    <b>Wiki JSON:</b><br>
+    <textarea id="wikijson" rows="12" cols="120">
+    </textarea>
+    <hr>
+  </body>
+
+  <script>
+
+  </script>
+</html>
