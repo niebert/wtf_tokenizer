@@ -14,7 +14,7 @@ function receiveDoc(pDoc) {
 */
 
 (async () => {
-  //var doc = await wtf_fetch.fetch("water","en","wikiversity",receiveDoc);
-  var doc = await wtf_fetch.random();
+  var doc = await wtf_fetch.fetch("water","en","wikiversity",receiveDoc);
+  //var doc = await wtf_fetch.random();
   receiveDoc(doc);
 })();
