@@ -95,13 +95,38 @@ const tokenizeMath = function(wiki, data, options) {
   return wiki
 };
 
-const detokenizeMath = function(wiki, data, options) {
-  console.log("Detokenize Math not implemented yet!");
-  return wiki
+const toText = function(text, data, options) {
+  console.log("Export Math to Text not implemented yet!");
+  return text
+}
+
+const toHtml = function(text, data, options) {
+  console.log("Export Math to HTML not implemented yet!");
+  return text
+}
+
+const toLatex = function(text, data, options) {
+  console.log("Export Math to LaTeX not implemented yet!");
+  return text
+}
+
+
+const toMarkdown = function(text, data, options) {
+  console.log("Export Math to MarkDown not implemented yet!");
+  return text
+}
+
+const toJSON = function(pjson, data, options) {
+  console.log("Export Math to JSON not implemented yet!");
+  return pjson
 }
 
 let MathTokenizer = {
-  "entoken": tokenizeMath,
-  "detoken": detokenizeMath
+  "parse": tokenizeMath,
+  "text": toText,
+  "html": toHtml,
+  "latex": toLatex,
+  "markdown": toMarkdown,
+  "json": toJSON
 };
 module.exports = MathTokenizer;

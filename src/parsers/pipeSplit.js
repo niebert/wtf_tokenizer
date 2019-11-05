@@ -1,4 +1,5 @@
 const keyVal = /[a-z0-9]+ *?= *?[a-z0-9]/i;
+//console.log("pipeSplit.js load '_pipes.js'");
 const pipes = require('./_pipes');
 
 //templates that look like this:
@@ -29,4 +30,5 @@ const pipeSplit = function(tmpl, order) {
   });
   return obj;
 };
+//console.log("export pipeSplit()");
 module.exports = pipeSplit;

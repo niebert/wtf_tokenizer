@@ -1,5 +1,6 @@
 //get the name of the template
 //templates are usually '{{name|stuff}}'
+// console.log("require _getName.js");
 const getName = function(tmpl) {
   let name = null;
   //{{name|foo}}

@@ -1,4 +1,5 @@
-const parseSentence = require('../../04-sentence').oneSentence;
+// console.log("load oneSentence() parser in 'keyValue.js'");
+const parseSentence = require('../04-sentence').oneSentence;
 const strip = require('./_strip');
 
 //turn '| key = value' into an object
@@ -39,4 +40,5 @@ const keyValue = function(tmpl, isInfobox) {
   }, {});
   return obj;
 };
+// console.log("export keyValue()");
 module.exports = keyValue;

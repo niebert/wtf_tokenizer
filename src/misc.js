@@ -1,6 +1,10 @@
+// console.log("try to load 'parsers/keyValue.js'");
 const keyValue = require('./parsers/keyValue');
+// console.log("try to load 'parsers/inside.js'");
 const getInside = require('./parsers/inside');
+// console.log("try to load 'parsers/pipeSplit.js'");
 const pipeSplit = require('./parsers/pipeSplit');
+// console.log("try to load 'parsers/pipeList.js'");
 const pipeList = require('./parsers/pipeList');
 
 const sisterProjects = {
@@ -191,5 +195,5 @@ parsers['harvid'] = parsers.sfn;
 parsers['harvnb'] = parsers.sfn;
 parsers['redir'] = parsers.redirect;
 parsers['sisterlinks'] = parsers['sister project links'];
-
+// console.log("export parsers in 'misc.js'");
 module.exports = parsers;

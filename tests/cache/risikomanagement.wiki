@@ -1,0 +1,32 @@
+== Geschichte der Lernressource ==
+Diese Lernressource basiert auf dem Lernmodul des [[v:en:Risk_Management|englischsprachigen Bereichs von Wikiversity]]<ref>Risk Management/Content Matrix. (2018, August 18). Wikiversity. Retrieved 15:36, August 18, 2018 from https://en.wikiversity.org/w/index.php?title=Risk_Management/Content_Matrix&oldid=1911045.</ref>. Dieses Modul ist gegenwärtig (2019/04/28) unvollständig übersetzt.
+
+== Risikomanagement - Inhaltsmatrix ==
+
+{|class = "wikitable"
+|-
+! MATRIX !! Technologie !! Implementierung !! Forschung
+|-
+| '''<span style="color: red"> RISIKO (Risk): </span> Wo ist das Risiko?''' || z. B. GIS-Tutorial für Risikokarten || Räumliches Risiko-Mapping implementieren || z.B. Weg von Giftstoffen von der Quelle/Ausbringung zum Menschen identifizieren
+|-
+| '''<span style="color: #009933"> ANTWORT/REAKTION (Response): </span> Wo sind die Ressourcen?''' || z.B. Tutorial zur Ressourcenzuordnung mit GIS || z.B. Implementierung des Zugangs zu Risikominderungsressourcen durch Anwendung mobiler Geräte || z.B. Forschung zur Optimierung der Ressourcenzuordnung zur Risikominderung
+|-
+| '''<span style="color:blue"> AUSBILDUNG: </span> Risikobewusstsein und Handlungsfähigkeit der Bürger?''' || z.B. Mobile Endgeräte (App) zur Risikominderung nutzen || z.B. Implementierung von Bildungsinhalten, die die Entwicklung von Risiko- und Handlungskompetenzen unterstützen<ref> WHO - Risikominimierungsprogramm - Clean Care Safer Care (2005) - http://www.who.int/gpsc/background/de/ </ref> || z.B. [[w:en:Living Labs|Living Lab]] Forschung zur Stärkung von [[Risikoliteralität]]<ref>Risk Literacy. (2017, September 12). Wikiversity. Retrieved 16:53, September 12, 2017 from https://en.wikiversity.org/w/index.php?title=Risk_Literacy&oldid=1735465.</ref>
+|}
+
+[[File:Basic_Risk_Response_Cycle.png|thumb|Grundlegender Risiko- und Reaktionszyklus]]
+Risikomanagement (Risikomanagement) ist das
+* '''([[Wikipedia:Risiko|Risiko]]''' Identifizierung, Bewertung und Priorisierung von Risiken als ''Einfluß der Unsicherheit auf die Erreichbarkeit von Zielen''
+* '''(Antwort/Reaktion)''' Koordinierung und Implementierung von Maßnahmen, die die Wahrscheinlichkeit und/oder die Auswirkungen des [[Wikipedia:Ressource|Ressourcen]] auf Menschen, Umwelt und Technik realisieren, bzw. die Analyse, warum Risikominimierungsmaßnahmen scheitern bzw. nicht den erwarteten Erfolg zeigen<ref>Hubbard, D. W. (2009). The failure of risk management: Why it's broken and how to fix it. John Wiley & Sons.</ref>. Ziel ist es, die Wahrscheinlichkeit von schädlichen Ereignissen zu minimieren und/oder die Umsetzung von Möglichkeiten zur Risikominderung zu maximieren.
+[https://en.wikiversity.org/wiki/Risk_Literacy Risikoliteralität] bezielernen, Risiken zu identifizieren und eine angemessene Reaktion zu erzielen, werden im Modul über [[Risikokompetenz]] angesprochen.
+
+Systemische Konnektivität: Die Anwendung und Zuweisung von Ressourcen zur Risikominderung ist Teil der Reaktion auf das identifizierte Risiko. Die Antwort (z. B. Maßnahmen zur Mückenbekämpfung, Bildung im Bereich der Risikokompetenz) wiederum ändert das Risiko aufgrund besserer Vorsorge. Systemisch behandelt man ein rückgekoppeltes System, denn die Bewertung von Risikominderungsmaßnahmen löst eine Änderung der Allokation und der Anwendung von Ressourcen aus, um die Risikominderung in der nächsten Schleife zu verbessern. Bildung hilft, dass Individuen angemessen auf das Risiko reagieren können.
+
+== Siehe auch ==
+* [[Risikoliteralität|Risikokompetenz]] bzw. [[v:en:Risk Literacy|Risk Literacy]]
+* [https://www.harding-center.mpg.de/de Harding Centre für Risiko-Kompetenz] - aufgebaut durch [[w:de:Gerd Gigerenzer|Gerd Gigerenzer]]
+* [[Diffusion|Diffusion von Schadstoffen]]
+
+== Literatur/Quellen ==
+
+<noinclude>[[en:Risk Management]]</noinclude>

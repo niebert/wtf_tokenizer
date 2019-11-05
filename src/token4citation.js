@@ -1,23 +1,29 @@
 /* Tokenizer replaces
-  * Math Expression by Tokens of type
-     ___MATH_INLINE_793249879_ID_5___
-     ___MATH_BLOCK_793249879_ID_6___
-    and pushes the mathe code in the JSON data
-  * Citations
+  * Citation Expression by Tokens of type
+     ___CITE_793249879_ID_5___
+    and pushes the citation in the JSON data and
+    leaves a citation marker.
+  * Citations of the form
      replace <ref name="my citation" />
      by
      ___CITE_LABEL_my_citation___
 */
-const tokenlib = require('../lib/tokenlib')
-const helpers = require('../lib/helpers');
+const tokenlib = require('./lib/tokenlib')
+// console.log("Require 'src/lib/tokenlib.js' loaded in 'token4citation.js'!");
+const helpers = require('./lib/helpers');
+// console.log("Require 'src/lib/helpers.js' loaded in 'token4citation.js'!");
 
 const setTimeID = tokenlib.setTimeID;
 const replaceString = tokenlib.replaceString;
-
+// console.log("try to load './parsers/generic'");
 const parseGeneric = require('./parsers/generic');
+// console.log("Require '/parsers/generic.js' loaded in 'token4citation.js'!");
 const parsePipe = require('./misc')['cite gnis'];
+// console.log("Require 'misc.js' loaded with 'cite gnis' module in 'token4citation.js'!");
 const parseFmt = require('./04-sentence/formatting');
+// console.log("Require '/04-sentence/formatting.js' loaded in 'token4citation.js'!");
 const Reference = require('./reference/Reference');
+// console.log("Require '/reference/Reference.js' loaded in 'token4citation.js'!");
 
 //return only rendered text of wiki links
 const resolve_links = function(line) {
@@ -125,7 +131,8 @@ const storeReference = function (wiki,data,references,tmpl,pLabel) {
       obj.label = pLabel;
       references.push(obj);
     };
-    wiki = wiki.replace(tmpl, '');
+    // Remove Citation from Wiki Source ???
+    //wiki = wiki.replace(tmpl, '');
   } else {
     let obj = parseInline(tmpl);
     obj.label = pLabel;
@@ -176,7 +183,7 @@ const tokenizeRefs = function(wiki, data, options) {
   return wiki;
 }
 
-const parseRefs = function(wiki, data) {
+const parseRefs = function(wiki, data, options) {
   let references = [];
   wiki = wiki.replace(/ ?<ref>([\s\S]{0,1000}?)<\/ref> ?/gi, function(a, tmpl) {
     if (hasCitation(tmpl)) {
@@ -210,3 +217,40 @@ const parseRefs = function(wiki, data) {
   data.references = references.map(r => new Reference(r));
   return wiki;
 };
+
+
+const toText = function(text, data, options) {
+  console.log("Export Math to Text not implemented yet!");
+  return text
+}
+
+const toHtml = function(text, data, options) {
+  console.log("Export Math to HTML not implemented yet!");
+  return text
+}
+
+const toLatex = function(text, data, options) {
+  console.log("Export Math to LaTeX not implemented yet!");
+  return text
+}
+
+
+const toMarkdown = function(text, data, options) {
+  console.log("Export Math to MarkDown not implemented yet!");
+  return text
+}
+
+const toJSON = function(pjson, data, options) {
+  console.log("Export Math to JSON not implemented yet!");
+  return pjson
+}
+
+let CitationTokenizer = {
+  "parse": tokenizeCitation,
+  "text": toText,
+  "html": toHtml,
+  "latex": toLatex,
+  "markdown": toMarkdown,
+  "json": toJSON
+};
+module.exports = CitationTokenizer;

@@ -1,5 +1,8 @@
+// console.log("try to run parsers/generic.js");
 const keyValue = require('./keyValue');
+// console.log("try to run parsers/keyValue.js");
 const getName = require('./_getName');
+// console.log("try to run parsers/getName.js");
 const maybeKeyValue = /\|.+?[a-z].+?=/; // |foo=
 
 const knownTemplate = function(name) {
@@ -9,6 +12,7 @@ const knownTemplate = function(name) {
   return null;
 };
 
+// console.log("define genericTemplate()");
 //just go for it.
 const genericTemplate = function(tmpl) {
   if (maybeKeyValue.test(tmpl)) {
@@ -31,4 +35,5 @@ const genericTemplate = function(tmpl) {
   }
   return null;
 };
+// console.log("export './parsers/generic' module");
 module.exports = genericTemplate;

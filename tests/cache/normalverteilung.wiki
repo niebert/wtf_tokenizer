@@ -1,0 +1,736 @@
+{{Infobox Verteilung
+  | name       =
+  | type       = density
+  | pdf_image  = [[Datei:Normal Distribution PDF.svg|350px]] Dichtefunktionen der Normalverteilung <math>\mathcal N(\mu,\sigma^2)</math>:<br /><math>\mathcal N(0;0{,}2)</math> (blau), <math>\mathcal N(0;1)</math> (rot), <math>\mathcal N(0;5)</math> (gelb) und <math>\mathcal{N}(-2;\,0{,}5)</math> (grün)
+  | cdf_image  = [[Datei:Normal-distribution-cumulative-density-function-many.svg|350px]] Verteilungsfunktionen der Normalverteilungen:<br /><math>\mathcal N(0;0{,}2)</math> (blau), <math>\mathcal N(0,1)</math> (rot), <math>\mathcal N(0,5)</math> (gelb) und <math>\mathcal{N}(-2,\,0{,}5)</math> (grün)
+  | notation   = <math>\mathcal{N}(\mu,\sigma^2)</math>
+  | parameters = <math>\mu \in \R</math> – Erwartungswert ([[Lagemaß (Stochastik)|Lageparameter]])<br /><math>\sigma^2 > 0</math> – Varianz ([[Skalenparameter]])
+  | support    = <math>\mathcal T_X =\R</math>
+  | pdf        = <math>\frac{1}{\sqrt{2\pi\sigma^2}}\operatorname{exp}\left\{-\frac{\left(x-\mu\right)^2}{2\sigma^2}\right\}</math>
+  | cdf        = <math>\frac12\left(1 + \operatorname{erf}\left( \frac{x-\mu}{\sqrt{2\sigma^2}}\right)\right) </math><br />– mit [[Fehlerfunktion]] <math>\operatorname{erf}(x)</math>
+  | mean       = <math>\mu</math>
+  | median     = <math>\mu</math>
+  | mode       = <math>\mu</math>
+  | variance   = <math>\sigma^2\,</math>
+  | skewness   = <math>0</math>
+  | kurtosis   = <math>3</math>
+  | entropy    = <math>\frac12 \ln(2 \pi e \, \sigma^2)</math>
+  | mgf        = <math>\exp\left\{\mu t + \tfrac{1}{2}\sigma^2t^2\right\}</math>
+  | char       = <math>\exp\left\{i\mu t - \tfrac{1}{2}\sigma^2 t^2\right\}</math>
+  | fisher     = <math>\begin{pmatrix}1/\sigma^2&0\\0&1/(2\sigma^4)\end{pmatrix}</math>
+  | conjugate prior = Normal distribution
+  }}
+Die '''Normal-''' oder '''Gauß-Verteilung''' (nach [[Carl Friedrich Gauß]]) ist in der [[Stochastik]] ein wichtiger Typ stetiger [[Wahrscheinlichkeitsverteilung]]en. Ihre [[Wahrscheinlichkeitsdichtefunktion]] wird auch Gauß-Funktion, Gaußsche Normalverteilung, Gaußsche Verteilungskurve, Gauß-Kurve, Gaußsche Glockenkurve, Gaußsche Glockenfunktion, Gauß-Glocke oder schlicht Glockenkurve genannt.
+
+Die besondere Bedeutung der Normalverteilung beruht unter anderem auf dem [[Zentraler Grenzwertsatz|zentralen Grenzwertsatz]], dem zufolge Verteilungen, die durch additive Überlagerung einer großen Zahl von unabhängigen Einflüssen entstehen, unter schwachen Voraussetzungen annähernd normalverteilt sind. Die Familie der Normalverteilungen bildet eine Lage- und Skalenfamilie.
+
+Die Abweichungen der Messwerte vieler natur-, wirtschafts- und ingenieurwissenschaftlicher Vorgänge vom [[Erwartungswert]] lassen sich durch die Normalverteilung (bei biologischen Prozessen oft [[logarithmische Normalverteilung]]) entweder exakt oder wenigstens in sehr guter Näherung beschreiben (vor allem Prozesse, die in mehreren Faktoren unabhängig voneinander in verschiedene Richtungen wirken).
+
+Zufallsvariablen mit Normalverteilung benutzt man zur Beschreibung zufälliger Vorgänge wie:
+
+* zufällige [[Messabweichung|Messfehler]],
+* zufällige Abweichungen vom [[Sollmaß]] bei der Fertigung von Werkstücken,
+* Beschreibung der [[Brownsche Bewegung|brownschen Molekularbewegung]].
+
+In der [[Versicherungsmathematik]] ist die Normalverteilung geeignet zur Modellierung von Schadensdaten im Bereich mittlerer Schadenshöhen.
+
+In der [[Messtechnik]] wird häufig eine Normalverteilung angesetzt, die die Streuung der Messfehler beschreibt. Hierbei ist von Bedeutung, wie viele Messpunkte innerhalb einer gewissen Streubreite liegen.
+
+Die [[Standardabweichung (Wahrscheinlichkeitstheorie)|Standardabweichung]] <math>\sigma</math> beschreibt die Breite der Normalverteilung. Die [[Halbwertsbreite]] einer Normalverteilung ist das ungefähr <math>2{,}4</math>-Fache (genau <math>2 \sqrt{2 \ln 2}</math>) der Standardabweichung. Es gilt näherungsweise:
+* Im Intervall der Abweichung <math>\pm \sigma</math> vom Erwartungswert sind 68,27 % aller Messwerte zu finden,
+* Im Intervall der Abweichung <math>\pm 2\sigma</math> vom Erwartungswert sind 95,45 % aller Messwerte zu finden,
+* Im Intervall der Abweichung <math>\pm 3\sigma</math> vom Erwartungswert sind 99,73 % aller Messwerte zu finden.
+Und ebenso lassen sich umgekehrt für gegebene Wahrscheinlichkeiten die maximalen Abweichungen vom Erwartungswert finden:
+* 50 % aller Messwerte haben eine Abweichung von höchstens <math>0{,}675\sigma</math> vom Erwartungswert,
+* 90 % aller Messwerte haben eine Abweichung von höchstens <math>1{,}645\sigma</math> vom Erwartungswert,
+* 95 % aller Messwerte haben eine Abweichung von höchstens <math>1{,}960\sigma</math> vom Erwartungswert,
+* 99 % aller Messwerte haben eine Abweichung von höchstens <math>2{,}576\sigma</math> vom Erwartungswert.
+
+Somit kann neben dem Erwartungswert, der als Schwerpunkt der Verteilung interpretiert werden kann, auch der Standardabweichung eine einfache Bedeutung im Hinblick auf die Größenordnungen der auftretenden Wahrscheinlichkeiten bzw. Häufigkeiten zugeordnet werden.
+
+== Geschichte ==
+[[Datei:10 DM Serie4 Vorderseite.jpg|mini|hochkant=1.6|Gaußsche Glockenkurve auf einem deutschen [[Bargeld der Deutschen Mark#Vierte Serie Persönlichkeitsserie BBk III (1990)|Zehn-Mark-Schein]] der 1990er Jahre]]
+Im Jahre 1733 zeigte [[Abraham de Moivre]] in seiner Schrift ''The Doctrine of Chances'' im Zusammenhang mit seinen Arbeiten am [[Satz von Moivre-Laplace|Grenzwertsatz für Binomialverteilungen]] eine Abschätzung des Binomialkoeffizienten, die als Vorform der Normalverteilung gedeutet werden kann.<ref name="Götze 2002" />
+Die für die Normierung der Normalverteilungsdichte zur [[Wahrscheinlichkeitsdichte]] notwendige Berechnung des nicht[[Elementare Funktion|elementaren]] Integrals
+:<math>\int_{-\infty}^\infty e^{-\frac 12 t^2}\mathrm dt = \sqrt{2\pi}</math>
+gelang [[Pierre-Simon Laplace]] im Jahr&nbsp;1782 (nach anderen Quellen [[Siméon Denis Poisson|Poisson]]).
+Im Jahr&nbsp;1809 publizierte Gauß sein Werk ''Theoria motus corporum coelestium in sectionibus conicis solem ambientium'' (dt.: ''Theorie der Bewegung der in Kegelschnitten sich um die Sonne bewegenden Himmelskörper''), das neben der [[Methode der kleinsten Quadrate]] und der [[Maximum-Likelihood-Schätzung]] die Normalverteilung definiert.
+Ebenfalls Laplace war es, der 1810 den [[Zentraler Grenzwertsatz|Satz vom zentralen Grenzwert]] bewies, der die Grundlage der theoretischen Bedeutung der Normalverteilung darstellt und de Moivres Arbeit am Grenzwertsatz für Binomialverteilungen abschloss.
+[[Adolphe Quetelet]] erkannte schließlich bei Untersuchungen des Brustumfangs von mehreren tausend Soldaten im Jahr&nbsp;1844 eine verblüffende Übereinstimmung mit der Normalverteilung und brachte die Normalverteilung in die [[angewandte Statistik]]. Er hat vermutlich die Bezeichnung „Normalverteilung“ geprägt.<ref>Hans Wußing: [https://books.google.de/books?id=nVwtb4MTGUAC&pg=PA33 ''Von Gauß bis Poincaré: Mathematik und Industrielle Revolution.''] S.&nbsp;33.</ref>
+
+== Definition ==
+Eine [[stetige Zufallsvariable]] <math>X</math> hat eine (''Gauß-'' oder) ''Normalverteilung mit [[Erwartungswert]] <math>\mu</math> und [[Varianz (Stochastik)|Varianz]] <math>\sigma^2</math>'' (<math>-\infty<\mu<\infty, \sigma^2>0</math>), oft geschrieben als <math>X\sim\mathcal{N}\left(\mu,\sigma^2\right)</math>, wenn <math>X</math> die folgende [[Dichtefunktion|Wahrscheinlichkeitsdichte]] hat:<ref>Bei <math>e^x</math> handelt es sich um die [[Exponentialfunktion]] mit der Basis <math>e.</math></ref><ref>George G. Judge, R. Carter Hill, W. Griffiths, [[Helmut Lütkepohl]], T. C. Lee: ''Introduction to the Theory and Practice of Econometrics.'' 1988, S. 47.</ref>
+
+:<math>f(x \mid\mu,\sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}\operatorname{exp}\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)=\frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\quad -\infty<x<\infty</math>.
+
+Der Graph dieser Dichtefunktion hat eine „[[glocke]]nförmige Gestalt“ und ist [[Symmetrische Wahrscheinlichkeitsverteilung|symmetrisch]] mit dem [[Parameter (Statistik)|Parameter]] <math>\mu</math> als ''Symmetriezentrum,'' der auch den [[Erwartungswert]], den [[Median (Stochastik)|Median]] und den [[Modus (Stochastik)|Modus]] der Verteilung darstellt. Die Varianz von <math>X</math> ist der Parameter <math>\sigma^2</math>. Weiterhin hat die Wahrscheinlichkeitsdichte [[Wendepunkt]]e bei <math>x=\mu\pm\sigma</math>.
+
+Die Wahrscheinlichkeitsdichte einer normalverteilten Zufallsvariable hat kein definites Integral, das in ''geschlossener Form'' lösbar ist, sodass Wahrscheinlichkeiten numerisch berechnet werden müssen. Die Wahrscheinlichkeiten können mithilfe einer [[Standardnormalverteilungstabelle]] berechnet werden, die eine [[Standardisierung (Statistik)|Standardform]] verwendet. Um das zu sehen, benutzt man die Tatsache, dass eine [[lineare Funktion]] einer normalverteilten Zufallsvariablen selbst wieder normalverteilt ist. Konkret heißt das, wenn <math>X\sim\mathcal{N}\left(\mu,\sigma^2\right)</math> und <math>Y=aX+b</math>, wobei <math>a</math> und <math>b</math> Konstanten sind mit <math>a \ne 0</math>, dann gilt <math>Y\sim\mathcal{N}\left(a\mu+b,a^2\sigma^2\right)</math>. Als Folgerung daraus ergibt sich die Zufallsvariable<ref>George G. Judge, R. Carter Hill, W. Griffiths, [[Helmut Lütkepohl]], T. C. Lee: ''Introduction to the Theory and Practice of Econometrics.'' 1988, S. 48.</ref>
+[[Datei:Gauss dichtefunktion.svg|mini|Dichtefunktion <math>\varphi(x)=\tfrac {1}{\sqrt{2\pi}} e^{-\frac {1}{2} x^2}</math> einer normalverteilten Zufallsvariable]]
+:<math>Z=\frac{1}{\sigma}(X-\mu)\sim\mathcal{N}(0,1)</math>,
+
+die auch ''standardnormalverteilte Zufallsvariable'' <math>Z</math> genannt wird. Die ''Standardnormalverteilung'' ist also die Normalverteilung mit Parametern <math>\mu = 0</math> und <math>\sigma^2 = 1</math>. Die Dichtefunktion der Standardnormalverteilung ist gegeben durch
+
+:<math>\varphi(x)=\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} x^2}\quad -\infty<x<\infty</math>.
+
+Ihr Verlauf ist nebenstehend graphisch dargestellt.
+
+Die mehrdimensionale Verallgemeinerung ist im Artikel [[mehrdimensionale Normalverteilung]] zu finden.
+
+== Eigenschaften ==
+=== Verteilungsfunktion ===
+
+Die [[Verteilungsfunktion]] der Normalverteilung ist durch
+:<math>F(x) = \frac{1}{\sigma\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{1}{2} \left(\frac{t-\mu}{\sigma}\right)^2} \mathrm dt</math>
+gegeben. Wenn man durch die [[Substitutionsregel|Substitution]] <math>t=\sigma z + \mu</math> statt <math>t</math> eine neue Integrationsvariable <math>z := \tfrac{t-\mu}{\sigma}</math> einführt, ergibt sich
+:<math>F(x) = \frac{1}{\sqrt{2\pi}} \int\limits_{-\infty}^{(x-\mu)/\sigma} e^{-\frac 12 z^2} \mathrm d z = \Phi \left(\frac{x-\mu}{\sigma}\right).</math>
+Dabei ist <math>\Phi</math> die Verteilungsfunktion der Standardnormalverteilung
+:<math>\Phi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{1}{2} t^2} \mathrm dt.</math>
+Mit der [[Fehlerfunktion]] <math>\operatorname{erf}</math> lässt sich <math>\Phi</math> darstellen als
+:<math>\Phi(x) = \frac 12\left(1+\operatorname{erf}\left(\frac x{\sqrt 2}\right)\right)</math>.
+
+=== Symmetrie ===
+Der [[Funktionsgraph|Graph]] der Wahrscheinlichkeitsdichte <math>f\colon\ \R\to\R</math> ist eine Gaußsche Glockenkurve, deren Höhe und Breite von <math>\sigma</math> abhängt. Sie ist [[Achsensymmetrie#Achsensymmetrie von Funktionsgraphen|achsensymmetrisch]] zur Geraden mit der Gleichung <math>x = \mu</math> und somit eine [[symmetrische Wahrscheinlichkeitsverteilung]] um ihren Erwartungswert. Der Graph der Verteilungsfunktion <math>F</math> ist [[Punktsymmetrie#Punktsymmetrie von Funktionsgraphen|punktsymmetrisch]] zum Punkt <math>(\mu ; 0{,}5).</math> Für <math>\mu=0</math> gilt insbesondere <math>\varphi(-x) =\varphi(x)</math> und <math>\Phi(-x) = 1 - \Phi(x)</math> für alle <math>x \in \R</math>.
+
+=== Maximalwert und Wendepunkte der Dichtefunktion ===
+Mit Hilfe der ersten und zweiten [[Differentialrechnung|Ableitung]] lassen sich der Maximalwert und die Wendepunkte bestimmen. Die erste Ableitung ist
+:<math>f'(x) = -\frac{x-\mu}{\sigma^2} f(x).</math>
+Das Maximum der Dichtefunktion der Normalverteilung liegt demnach bei <math>x_\mathrm{max} = \mu</math> und beträgt dort <math>f_\mathrm{max} = \tfrac 1{\sigma\sqrt{2\pi}}</math>.
+
+Die zweite Ableitung lautet
+:<math>f''(x) = \frac 1{\sigma^2}\left(\frac 1{\sigma^2}(x-\mu)^2-1\right) f(x)</math>.
+
+Somit liegen die [[Wendepunkt|Wendestellen]] der Dichtefunktion bei <math>x=\mu\pm\sigma</math>. Die Dichtefunktion hat an den Wendestellen den Wert <math>\tfrac 1{\sigma\sqrt{2\pi e}}</math>.
+
+=== Normierung ===
+[[Datei:Dirac function approximation.gif|rechts|gerahmt|Dichte einer zentrierten Normalverteilung <math> \delta_{a}(x)=\tfrac {1}{\sqrt{\pi}a} \cdot e^{-\frac {x^2}{a^2}}</math>.<br /> Für <math>a\to 0</math> wird die Funktion immer höher und schmaler, der [[Flächeninhalt]] bleibt jedoch unverändert 1.]]
+Wichtig ist, dass die gesamte Fläche unter der [[Funktionsgraph|Kurve]] gleich <math>1</math>, also gleich der Wahrscheinlichkeit des sicheren [[Ereignis (Wahrscheinlichkeitstheorie)|Ereignisses]], ist. Somit folgt, dass, wenn zwei Gaußsche Glockenkurven dasselbe <math>\mu</math>, aber unterschiedliches <math>\sigma</math> haben, die Kurve mit dem größeren <math>\sigma</math> breiter und niedriger ist (da ja beide zugehörigen Flächen jeweils den Wert <math>1</math> haben und nur die Standardabweichung größer ist). Zwei Glockenkurven mit gleichem <math>\sigma,</math> aber unterschiedlichem <math>\mu</math> haben kongruente Graphen, die um die Differenz der <math>\mu</math>-Werte parallel zur <math>x</math>-Achse gegeneinander verschoben sind.
+
+Jede Normalverteilung ist tatsächlich normiert, denn mit Hilfe der linearen [[Integration durch Substitution|Substitution]] <math>z= \tfrac{x-\mu}\sigma</math> erhalten wir
+:<math> \int_{-\infty}^\infty \frac 1{\sigma \sqrt{2\pi}} e^{-\frac 12 \left(\frac{x-\mu}\sigma\right)^2} \mathrm dx= \frac 1{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-\frac 12 z^2} \mathrm dz=1</math>.
+
+Für die Normiertheit des letzteren Integrals siehe [[Fehlerintegral#Normierung|Fehlerintegral]].
+
+=== Berechnung ===
+Da sich <math>\Phi(z)</math> nicht auf eine elementare [[Stammfunktion]] zurückführen lässt, wurde für die Berechnung früher meist auf Tabellen zurückgegriffen (siehe [[Standardnormalverteilungstabelle]]). Heutzutage sind in statistischen Programmiersprachen wie zum Beispiel [[R (Programmiersprache)|R]] Funktionen verfügbar, die auch die Transformation auf beliebige <math> \mu </math> und <math> \sigma </math> beherrschen.
+
+=== Erwartungswert ===
+Der [[Erwartungswert]] der Standardnormalverteilung ist <math>0</math>. Es sei <math>X \sim \mathcal N\left(0,1\right)</math>, so gilt
+
+:<math> \operatorname{E}(X) =\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{+\infty}x\ e^{-\frac 12 x^2}\mathrm dx = 0,</math>
+
+da der Integrand [[Uneigentliches Integral|integrierbar]] und [[Punktsymmetrie|punktsymmetrisch]] ist.
+
+
+Ist nun <math>Y \sim \mathcal{N}\left(\mu, \sigma^2\right)</math>, so gilt <math>X=(Y-\mu)/\sigma</math> ist standardnormalverteilt, und somit
+
+:<math> \operatorname{E}(Y)=\operatorname{E}(\sigma X + \mu)=\sigma \underbrace{\operatorname{E}(X)}_{=0} + \mu=\mu.</math>
+
+=== Varianz und weitere Streumaße ===
+Die [[Varianz (Stochastik)|Varianz]] der <math>(\mu, \sigma^2)</math>-normalverteilten Zufallsvariablen entspricht dem Parameter <math>\sigma^2</math>
+
+:<math>\operatorname{Var}(X)=\frac{1}{\sqrt{2\pi \sigma^2}}\int_{-\infty}^\infty(x-\mu)^2 e^{ -\frac{(x-\mu)^2}{2\sigma^2} } \, \mathrm dx=\sigma^2</math>.
+
+Ein [[Fehlerintegral#Normierung|elementarer Beweis]] wird Poisson zugeschrieben.
+
+Die [[Streuung (Statistik)#Mittlere absolute Abweichung|mittlere absolute Abweichung]] ist <math> \sqrt{\frac{2}{\pi}}\,\sigma \approx 0{,}80\sigma</math> und der [[Quantil (Wahrscheinlichkeitstheorie)#Quartil|Interquartilsabstand]] <math>\approx 1{,}349\sigma</math>.
+
+=== Standardabweichung der Normalverteilung ===
+Eindimensionale Normalverteilungen werden durch Angabe von Erwartungswert <math alt="µ">\mu</math> und Varianz <math alt="σ²">\sigma^2</math> vollständig beschrieben. Ist also <math>X</math> eine <math alt="µ">\mu</math>-<math alt="σ²">\sigma^2</math>-verteilte Zufallsvariable – in Symbolen <math alt="X ∼ 𝒩(µ, σ²)">X \sim \mathcal{N}(\mu,\sigma^2)</math> –, so ist ihre Standardabweichung einfach <math alt="σ(X) = √σ² = σ">\sigma_X = \sqrt{\sigma^2} = \sigma</math>.
+
+==== Streuintervalle ====
+[[Datei:Standard deviation diagram.svg|mini|hochkant=1.4|Intervalle um <math alt="µ">\mu</math> bei der Normalverteilung]]
+Aus der [[Standardnormalverteilungstabelle]] ist ersichtlich, dass für normalverteilte Zufallsvariablen jeweils ungefähr
+: 68,3 % der [[Realisierung (Stochastik)|Realisierungen]] im [[Intervall (Mathematik)|Intervall]] <math alt="µ ± σ">\mu\pm\sigma</math>,
+: 95,4 % im Intervall <math alt="µ ± 2σ">\mu\pm 2\sigma</math> und
+: 99,7 % im Intervall <math alt="µ ± 3σ">\mu\pm 3\sigma</math>
+liegen. Da in der Praxis viele Zufallsvariablen annähernd normalverteilt sind, werden diese Werte aus der Normalverteilung oft als Faustformel benutzt. So wird beispielsweise <math>\sigma</math> oft als die halbe Breite des Intervalls angenommen, das die mittleren zwei Drittel der Werte in einer Stichprobe umfasst, siehe [[Quantil (Wahrscheinlichkeitstheorie)|Quantil]].
+
+[[Datei:Kontaminierte Normalverteilung.svg|mini|Normalverteilung (a) und kontaminierte Normalverteilung (b)]]
+Diese Praxis ist aber nicht empfehlenswert, denn sie kann zu sehr großen Fehlern führen. Zum Beispiel ist die Verteilung <math>P = 0{,}9\cdot\mathcal{N}(\mu,\sigma^2)+0{,}1\cdot\mathcal{N}(\mu,(10\sigma)^2)</math> optisch kaum von der Normalverteilung zu unterscheiden (siehe Bild), aber bei ihr liegen im Intervall <math>\mu\pm\overline\sigma</math> 92,5 % der Werte, wobei <math>\overline\sigma</math> die Standardabweichung von <math>P</math> bezeichnet. Solche [[Kontaminierte Normalverteilung|kontaminierten Normalverteilungen]] sind in der Praxis sehr häufig; das genannte Beispiel beschreibt die Situation, wenn zehn Präzisionsmaschinen etwas herstellen, aber eine davon schlecht justiert ist und mit zehnmal so hohen Abweichungen wie die anderen neun produziert.
+
+Werte außerhalb der zwei- bis dreifachen Standardabweichung werden oft als [[Ausreißer]] behandelt. Ausreißer können ein Hinweis auf grobe Fehler der [[Daten]]erfassung sein. Es kann den Daten aber auch eine stark [[Schiefe (Statistik)|schiefe]] Verteilung zugrunde liegen. Andererseits liegt bei einer Normalverteilung im Durchschnitt ca. jeder 20.&nbsp;Messwert außerhalb der zweifachen Standardabweichung und ca. jeder 500.&nbsp;Messwert außerhalb der dreifachen Standardabweichung.
+
+Da der Anteil der Werte außerhalb der sechsfachen Standardabweichung mit ca. 2&nbsp;[[Parts per billion|ppb]] verschwindend klein wird, gilt ein solches Intervall als gutes Maß für eine nahezu vollständige Abdeckung aller Werte. Das wird im Qualitätsmanagement durch die Methode [[Six Sigma]] genutzt, indem die Prozessanforderungen Toleranzgrenzen von mindestens <math>6\sigma</math> vorschreiben. Allerdings geht man dort von einer langfristigen Erwartungswertverschiebung um 1,5 Standardabweichungen aus, sodass der zulässige Fehleranteil auf 3,4&nbsp;[[Parts per million|ppm]] steigt. Dieser Fehleranteil entspricht einer viereinhalbfachen Standardabweichung (<math>4{,}5\ \sigma</math>). Ein weiteres Problem der <math>6\sigma</math>-Methode ist, dass die <math>6\sigma</math>-Punkte praktisch nicht bestimmbar sind. Bei unbekannter Verteilung (d.&nbsp;h., wenn es sich nicht ''ganz sicher'' um eine Normalverteilung handelt) grenzen zum Beispiel die Extremwerte von 1.400.000.000 Messungen ein 75-%-[[Konfidenzintervall]] für die <math>6\sigma</math>-Punkte ein.<ref>H. Schmid, A. Huber: [http://schmid-werren.ch/hanspeter/publications/2014sscm.pdf ''Measuring a Small Number of Samples and the 3σ Fallacy.''] (PDF) In: ''IEEE Solid-State Circuits Magazine.'' Bd. 6, Nr. 2, 2014, S. 52–58, {{DOI|10.1109/MSSC.2014.2313714}}.</ref>
+
+[[Datei:Confidence interval by Standard deviation.svg|mini|Abhängigkeit der Wahrscheinlichkeit (Prozent innerhalb) von der Größe des Streuintervalls <math>p(z)</math>]]
+[[Datei:Standard deviation by Confidence interval.svg|mini|Abhängigkeit der Streuintervallgrenze von der eingeschlossenen Wahrscheinlichkeit <math>z(p)</math>]]
+{| class="wikitable"
+|+ Erwartete Anteile der Werte einer normalverteilten Zufallsvariablen innerhalb bzw. außerhalb der Streuintervalle <math>\left(\mu-z\sigma, \mu+z\sigma\right)</math>
+|-
+! <math>z\sigma</math>
+! Prozent innerhalb
+! Prozent außerhalb
+! ppb außerhalb
+! Bruchteil außerhalb
+|-
+| 0,674490 <math>\sigma</math>
+| 50 %
+| 50 %
+| 500.000.000
+| 1&nbsp;/&nbsp;2
+|-
+| 0,994458 <math>\sigma</math>
+| 68 %
+| 32 %
+| 320.000.000
+| 1&nbsp;/&nbsp;3,125
+|-
+| 1 <math>\sigma</math>
+| 68,268 9492 %
+| 31,731 0508 %
+| 317.310.508
+| 1&nbsp;/&nbsp;3,151 4872
+|-
+| 1,281552 <math>\sigma</math>
+| 80 %
+| 20 %
+| 200.000.000
+| 1&nbsp;/&nbsp;5
+|-
+| 1,644854 <math>\sigma</math>
+| 90 %
+| 10 %
+| 100.000.000
+| 1&nbsp;/&nbsp;10
+|-
+| 1,959964 <math>\sigma</math>
+| 95 %
+| 5 %
+| 50.000.000
+| 1&nbsp;/&nbsp;20
+|-
+| 2 <math>\sigma</math>
+| 95,449 9736 %
+| 4,550 0264 %
+| 45.500.264
+| 1&nbsp;/&nbsp;21,977 895
+|-
+| 2,354820 <math>\sigma</math>
+|98,146 8322 %
+|1,853 1678 %
+|18.531.678
+|1 / 54
+|-
+| 2,575829 <math>\sigma</math>
+| 99 %
+| 1 %
+| 10.000.000
+| 1&nbsp;/&nbsp;100
+|-
+| 3 <math>\sigma</math>
+| 99,730 0204 %
+| 0,269 9796 %
+| 2.699.796
+| 1&nbsp;/&nbsp;370,398
+|-
+| 3,290527 <math>\sigma</math>
+| 99,9 %
+| 0,1 %
+| 1.000.000
+| 1&nbsp;/&nbsp;1.000
+|-
+| 3,890592 <math>\sigma</math>
+| 99,99 %
+| 0,01 %
+| 100.000
+| 1&nbsp;/&nbsp;10.000
+|-
+| 4 <math>\sigma</math>
+| 99,993 666 %
+| 0,006 334 %
+| 63.340
+| 1&nbsp;/&nbsp;15.787
+|-
+| 4,417173 <math>\sigma</math>
+| 99,999 %
+| 0,001 %
+| 10.000
+| 1&nbsp;/&nbsp;100.000
+|-
+| 4,891638 <math>\sigma</math>
+| 99,9999 %
+| 0,0001 %
+| 1.000
+| 1&nbsp;/&nbsp;1.000.000
+|-
+| 5 <math>\sigma</math>
+| 99,999 942 6697 %
+| 0,000 057 3303 %
+| 573,3303
+| 1&nbsp;/&nbsp;1.744.278
+|-
+| 5,326724 <math>\sigma</math>
+| 99,999 99 %
+| 0,000 01 %
+| 100
+| 1&nbsp;/&nbsp;10.000.000
+|-
+| 5,730729 <math>\sigma</math>
+| 99,999 999 %
+| 0,000 001 %
+| 10
+| 1&nbsp;/&nbsp;100.000.000
+|-
+| 6 <math>\sigma</math>
+| 99,999 999 8027 %
+| 0,000 000 1973 %
+| 1,973
+| 1&nbsp;/&nbsp;506.797.346
+|-
+| 6,109410 <math>\sigma</math>
+| 99,999 9999 %
+| 0,000 0001 %
+| 1
+| 1&nbsp;/&nbsp;1.000.000.000
+|-
+| 6,466951 <math>\sigma</math>
+| 99,999 999 99 %
+| 0,000 000 01 %
+| 0,1
+| 1&nbsp;/&nbsp;10.000.000.000
+|-
+| 6,806502 <math>\sigma</math>
+| 99,999 999 999 %
+| 0,000 000 001 %
+| 0,01
+| 1&nbsp;/&nbsp;100.000.000.000
+|-
+| 7 <math>\sigma</math>
+| 99,999 999 999 7440 %
+| 0,000 000 000 256 %
+| 0,002 56
+| 1&nbsp;/&nbsp;390.682.215.445
+|}
+Die Wahrscheinlichkeiten <math>p</math> für bestimmte Streuintervalle <math>[\mu -z\sigma;\mu+z\sigma]</math> können berechnet werden als
+
+: <math>p = 2 \Phi(z) - 1</math>,
+
+wobei <math>\Phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^z e^{-\frac{x^2}{2}}\,\mathrm dx</math> die [[Verteilungsfunktion]] der Standardnormalverteilung ist.
+
+Umgekehrt können für gegebenes <math>p \in (0,1)</math> durch
+
+: <math>z = \Phi^{-1}\left(\frac{p+1}{2}\right)</math>
+
+die Grenzen des zugehörigen Streuintervalls <math>[\mu -z\sigma;\mu+z\sigma]</math> mit Wahrscheinlichkeit <math>p</math> berechnet werden.
+
+==== Ein Beispiel (mit Schwankungsbreite) ====
+Die [[Körpergröße]] des Menschen ist näherungsweise normalverteilt. Bei einer Stichprobe von 1.284 Mädchen und 1.063 Jungen zwischen 14 und 18 Jahren wurde bei den Mädchen eine durchschnittliche Körpergröße von 166,3&nbsp;cm (Standardabweichung 6,39&nbsp;cm) und bei den Jungen eine durchschnittliche Körpergröße von 176,8&nbsp;cm (Standardabweichung 7,46&nbsp;cm) gemessen.<ref>Mareke Arends: ''Epidemiologie bulimischer Symptomatik unter 10-Klässlern in der Stadt Halle.'' Dissertation. Martin-Luther-Universität Halle-Wittenberg, 2005, Tabelle 9, S. 30. {{URN|nbn:de:gbv:3-000008151}}</ref>
+
+Demnach lässt obige Schwankungsbreite erwarten, dass 68,3 % der Mädchen eine Körpergröße im Bereich 166,3&nbsp;cm ± 6,39&nbsp;cm und 95,4 % im Bereich 166,3&nbsp;cm ± 12,8&nbsp;cm haben,
+* 16 % [≈&nbsp;(100 %&nbsp;−&nbsp;68,3 %)/2] der Mädchen kleiner als 160&nbsp;cm (und 16 % entsprechend größer als 173&nbsp;cm) sind und
+* 2,5 % [≈&nbsp;(100 %&nbsp;−&nbsp;95,4 %)/2] der Mädchen kleiner als 154&nbsp;cm (und 2,5 % entsprechend größer als 179&nbsp;cm) sind.
+
+Für die Jungen lässt sich erwarten, dass 68 % eine Körpergröße im Bereich 176,8&nbsp;cm ± 7,46&nbsp;cm und 95 % im Bereich 176,8&nbsp;cm ± 14,92&nbsp;cm haben,
+* 16 % der Jungen kleiner als 169&nbsp;cm (und 16 % größer als 184&nbsp;cm) und
+* 2,5 % der Jungen kleiner als 162&nbsp;cm (und 2,5 % größer als 192&nbsp;cm) sind.
+
+=== Variationskoeffizient ===
+Aus Erwartungswert <math>\mu</math> und Standardabweichung <math>\sigma</math> der <math>\mathcal N(\mu,\sigma^2)</math>-Verteilung erhält man unmittelbar den [[Variationskoeffizient]]en
+:<math>\operatorname{VarK} = \frac{\sigma}{\mu}.</math>
+
+=== Schiefe ===
+Die [[Schiefe (Statistik)|Schiefe]] besitzt unabhängig von den Parametern <math>\mu</math> und <math>\sigma</math> immer den Wert <math>0</math>.
+
+=== Wölbung ===
+Die [[Wölbung (Statistik)|Wölbung]] ist ebenfalls von <math>\mu</math> und <math>\sigma</math> unabhängig und ist gleich <math>3</math>. Um die Wölbungen anderer Verteilungen besser einschätzen zu können, werden sie oft mit der Wölbung der Normalverteilung verglichen. Dabei wird die Wölbung der Normalverteilung auf <math>0</math> normiert (Subtraktion von 3); diese Größe wird als [[Wölbung (Statistik)#Exzess|Exzess]] bezeichnet.
+
+=== Kumulanten ===
+Die [[kumulantenerzeugende Funktion]] ist
+:<math>g_X(t)= \mu t+\frac{\sigma^2 t^2}2 </math>
+
+Damit ist die erste [[Kumulante]] <math> \kappa_1=\mu </math>, die zweite ist <math> \kappa_2=\sigma^2 </math> und alle weiteren Kumulanten verschwinden.
+
+=== Charakteristische Funktion ===
+Die [[Charakteristische Funktion (Stochastik)|charakteristische Funktion]] für eine standardnormalverteilte Zufallsvariable <math>Z \sim \mathcal N(0,1)</math> ist
+:<math>\varphi_Z(t) = e^{-\frac 12 t^2}</math>.
+
+Für eine Zufallsvariable <math>X \sim \mathcal N(\mu, \sigma^2)</math> erhält man daraus mit <math>X = \sigma Z + \mu</math>:
+
+:<math>\varphi_X(t)=\operatorname E(e^{it(\sigma Z + \mu)})=\operatorname E(e^{it\sigma Z}e^{it\mu})= e^{it\mu}\operatorname{E}(e^{it\sigma Z})=e^{it\mu}\varphi_Z(\sigma t)= \exp\left\{it\mu-\tfrac 12 \sigma^2 t^2\right\}</math>.
+
+=== Momenterzeugende Funktion ===
+Die [[momenterzeugende Funktion]] der Normalverteilung lautet
+
+:<math>m_X(t)=\exp\left\{\mu t+\frac{\sigma^2 t^2}2\right\}</math>.
+
+=== Momente ===
+Die Zufallsvariable <math>X</math> sei <math>\mathcal{N}(\mu,\sigma^2)</math>-verteilt.
+Dann sind ihre ersten Momente wie folgt:
+{| class="wikitable zebra centered" style="text-align:right"
+! align="right"| Ordnung
+! [[Moment (Stochastik)|Moment]]
+! [[Moment (Stochastik)#Zentrale Momente|zentrales Moment]]
+|----
+! align="right"|<math>k</math>
+! <math>\operatorname E(X^k)</math>
+! <math>\operatorname E((X-\mu)^k)</math>
+|---- align="right"
+|-
+| 0 || <math>1</math> || <math>1</math>
+|-
+| 1 || <math>\mu</math> || <math>0</math>
+|-
+| 2 || <math>\mu^2 + \sigma^2</math> || <math>\sigma^2</math>
+|-
+| 3 || <math>\mu^3 + 3\mu\sigma^2</math> || <math>0</math>
+|-
+| 4 || <math>\mu^4 + 6 \mu^2 \sigma^2 + 3 \sigma^4</math> || <math>3 \sigma^4</math>
+|-
+| 5 || <math>\mu^5 + 10 \mu^3 \sigma^2 + 15 \mu \sigma^4</math> || <math>0</math>
+|-
+| 6 || <math>\mu^6 + 15 \mu^4 \sigma^2 + 45 \mu^2 \sigma^4 + 15 \sigma^6 </math> || <math> 15 \sigma^6 </math>
+|-
+| 7 || <math>\mu^7 + 21 \mu^5 \sigma^2 + 105 \mu^3 \sigma^4 + 105 \mu \sigma^6 </math> || <math>0</math>
+|-
+| 8 || <math>\mu^8 + 28 \mu^6 \sigma^2 + 210 \mu^4 \sigma^4 + 420 \mu^2 \sigma^6 + 105 \sigma^8 </math> || <math> 105 \sigma^8 </math>
+|}
+Alle zentralen Momente <math>\mu_n</math> lassen sich durch die Standardabweichung <math>\sigma</math> darstellen:
+
+:<math>\mu_{n}=\begin{cases}
+0 & \text{wenn }n\text{ ungerade}\\
+(n-1)!! \cdot \sigma^n & \text{wenn }n\text{ gerade}\end{cases}</math>
+
+dabei wurde die [[Doppelfakultät]] verwendet:
+
+:<math>(n-1)!! = (n-1)\cdot(n-3)\cdot\ldots\cdot 3\cdot 1 \quad \mathrm{f\ddot ur}\; n \text{ gerade}.</math>
+
+Auch für <math>X \sim \mathcal N(\mu,\sigma^2)</math> kann eine Formel für nicht-zentrale Momente angegeben werden. Dafür transformiert man <math>Z \sim \mathcal N(0,1)</math> und wendet den binomischen Lehrsatz an.
+:<math>\operatorname E(X^k) = \operatorname E((\sigma Z + \mu)^k) = \sum_{j=0}^k {k \choose j} \operatorname E(Z^j) \sigma^j \mu^{k-j} = \sum_{i=0}^{\lfloor k/2 \rfloor} {k \choose 2i} \operatorname E(Z^{2i}) \sigma^{2i} \mu^{k-2i} = \sum_{i=0}^{\lfloor k/2 \rfloor} {k \choose 2i} (2i-1)!! \sigma^{2i} \mu^{k-2i}. </math>
+
+=== Invarianz gegenüber Faltung ===
+Die Normalverteilung ist [[invariant]] gegenüber der [[Faltung (Stochastik)|Faltung]], d.&nbsp;h., die Summe unabhängiger normalverteilter Zufallsvariablen ist wieder normalverteilt (siehe dazu auch unter [[Alpha-stabile Verteilungen|stabile Verteilungen]] bzw. unter [[Unendliche Teilbarkeit|unendliche teilbare Verteilungen]]). Somit bildet die Normalverteilung eine [[Faltungshalbgruppe]] in ihren beiden Parametern. Eine veranschaulichende Formulierung dieses Sachverhaltes lautet: Die Faltung einer Gaußkurve der [[Halbwertsbreite]] <math>\Gamma_a</math> mit einer Gaußkurve der Halbwertsbreite <math>\Gamma_b</math> ergibt wieder eine Gaußkurve mit der Halbwertsbreite
+:<math>\Gamma_c = \sqrt{\Gamma_a^2 + \Gamma_b^2}.</math>
+Sind also <math>X, Y</math> zwei unabhängige Zufallsvariablen mit
+:<math>X \sim \mathcal N(\mu_X,\sigma_X^2),\ Y \sim \mathcal N(\mu_Y,\sigma_Y^2),</math>
+so ist deren Summe ebenfalls normalverteilt:
+:<math>X+Y \sim \mathcal N(\mu_X+\mu_Y,\sigma_X^2+\sigma_Y^2)</math>
+
+Das kann beispielsweise mit Hilfe von charakteristischen Funktionen gezeigt werden, indem man verwendet, dass die charakteristische Funktion der Summe das Produkt der charakteristischen Funktionen der Summanden ist (vgl. [[Faltungssatz]] der Fouriertransformation).
+
+Gegeben seien allgemeiner <math>n</math> unabhängige und normalverteilte Zufallsvariablen <math>X_i \sim \mathcal N(\mu_i, \sigma_i^2)</math>.
+Dann ist jede [[Linearkombination]] wieder normalverteilt
+:<math>\sum_{i=1}^n c_i X_i \sim \mathcal N\left(\sum_{i=1}^n c_i \mu_i, \sum_{i=1}^n c_i^2 \sigma_i^2 \right)</math>
+insbesondere ist die Summe der Zufallsvariablen wieder normalverteilt
+:<math>\sum_{i=1}^n X_i \sim \mathcal N\left(\sum_{i=1}^n \mu_i, \sum_{i=1}^n \sigma_i^2 \right)</math>
+und das arithmetische Mittel ebenfalls
+:<math>\frac 1n \sum_{i=1}^n X_i \sim \mathcal N\left(\frac 1n \sum_{i=1}^n \mu_i, \frac 1{n^2} \sum_{i=1}^n \sigma_i^2 \right).</math>
+
+Nach dem [[Satz von Cramér]] gilt sogar die Umkehrung: Ist eine normalverteilte Zufallsvariable die Summe von unabhängigen Zufallsvariablen, dann sind die Summanden ebenfalls normalverteilt.
+
+Die Dichtefunktion der Normalverteilung ist ein [[Fixpunkt (Mathematik)|Fixpunkt]] der [[Fourier-Transformation]], d.&nbsp;h., die Fourier-Transformierte einer Gaußkurve ist wieder eine Gaußkurve. Das Produkt der [[Standardabweichung (Wahrscheinlichkeitstheorie)|Standardabweichungen]] dieser korrespondierenden Gaußkurven ist konstant; es gilt die [[Heisenbergsche Unschärferelation]].
+
+=== Entropie ===
+Die Normalverteilung hat die [[Entropie (Informationstheorie)|Entropie]]: <math>\log\left(\sigma\sqrt{2\,\pi\,e}\right)</math>.
+
+Da sie für gegebenen Erwartungswert und gegebene Varianz die größte Entropie unter allen Verteilungen hat, wird sie in der [[Maximum-Entropie-Methode]] oft als [[A-priori-Wahrscheinlichkeit]] verwendet.
+
+== Beziehungen zu anderen Verteilungsfunktionen ==
+=== Transformation zur Standardnormalverteilung ===
+Eine Normalverteilung mit beliebigen <math> \mu </math> und <math> \sigma </math> und der Verteilungsfunktion <math>F</math> hat, wie oben erwähnt, die nachfolgende Beziehung zur <math>\mathcal{N}(0,1)</math>-Verteilung:
+
+:<math>F(x) = \Phi \left(\tfrac{x-\mu}{\sigma}\right)</math>.
+
+Darin ist <math>\Phi</math> die Verteilungsfunktion der Standardnormalverteilung.
+
+Wenn <math>X\sim \mathcal{N}(\mu,\sigma^2)</math>, dann führt die [[Standardisierung (Statistik)|Z-Transformation]]
+
+:<math>Z=\frac{X-\mu}{\sigma}</math>
+
+zu einer standardnormalverteilten Zufallsvariablen <math>Z</math>, denn
+
+:<math>P(Z\le z)=P\left(\tfrac{X-\mu}{\sigma}\le z\right)=P\left(X\le \sigma z+\mu\right)=F(\sigma z+\mu)=\Phi(z)</math>.
+
+Geometrisch betrachtet entspricht die durchgeführte Substitution einer flächentreuen Transformation der Glockenkurve von <math> \mathcal{N}(\mu;\sigma^2) </math> zur Glockenkurve von <math>\mathcal{N}(0,1)</math>.
+
+=== Approximation der Binomialverteilung durch die Normalverteilung ===
+{{Hauptartikel|Normal-Approximation}}
+Die Normalverteilung kann zur Approximation der [[Binomialverteilung]] verwendet werden, wenn der Stichprobenumfang hinreichend groß und in der Grundgesamtheit der Anteil der gesuchten Eigenschaft weder zu groß noch zu klein ist ([[Satz von Moivre-Laplace]], [[zentraler Grenzwertsatz]], zur experimentellen Bestätigung siehe auch unter [[Galtonbrett]]).
+
+Ist ein Bernoulli-Versuch mit <math>n</math> voneinander unabhängigen Stufen (bzw. [[Zufallsexperiment]]en) mit einer Erfolgswahrscheinlichkeit <math>p</math> gegeben, so lässt sich die Wahrscheinlichkeit für <math>k</math> Erfolge allgemein durch <math>P(X=k) = \tbinom{n}{k} \cdot p^k \cdot (1-p)^{n-k},\quad k = 0, 1, \dotsc, n</math> berechnen ([[Binomialverteilung]]).
+
+Diese Binomialverteilung kann durch eine Normalverteilung approximiert werden, wenn <math>n</math> hinreichend groß und <math>p</math> weder zu groß noch zu klein ist. Als Faustregel dafür gilt <math>np(1-p)\geq 9</math>. Für den Erwartungswert <math>\mu</math> und die Standardabweichung <math>\sigma</math> gilt dann:
+:<math>\mu=n\cdot p </math> und <math>\sigma=\sqrt{n \cdot p \cdot (1-p)}</math>.
+Damit gilt für die Standardabweichung <math>\sigma\geq 3</math>.
+
+Falls diese Bedingung nicht erfüllt sein sollte, ist die Ungenauigkeit der Näherung immer noch vertretbar, wenn gilt: <math>np\geq 4</math> und zugleich <math>n(1-p)\geq 4</math>.
+
+Folgende Näherung ist dann brauchbar:
+
+:<math>\begin{align}
+ P(x_1 \leq X \leq x_2) &= \underbrace{\sum_{k=x_1}^{x_2} {n \choose k} \cdot p^k\cdot (1-p)^{n-k}}_{\mathrm{BV}}\\
+ &\approx \underbrace{\Phi\left(\frac{x_2+0{,}5-\mu}{\sigma}\right) -\Phi\left(\frac{x_1-0{,}5-\mu}{\sigma}\right)}_{\mathrm{NV}}.
+\end{align}</math>
+
+Bei der Normalverteilung wird die untere Grenze um 0,5 verkleinert und die obere Grenze um 0,5 vergrößert, um eine bessere Approximation gewährleisten zu können. Dies nennt man auch „Stetigkeitskorrektur“. Nur wenn <math>\sigma</math> einen sehr hohen Wert besitzt, kann auf sie verzichtet werden.
+
+Da die Binomialverteilung diskret ist, muss auf einige Punkte geachtet werden:
+* Der Unterschied zwischen <math><</math> oder <math>\leq</math> (sowie zwischen ''größer'' und ''größer gleich'') muss beachtet werden (was ja bei der Normalverteilung nicht der Fall ist). Deshalb muss bei <math>P(X_\text{BV}<x)</math> die nächstkleinere natürliche Zahl gewählt werden, d.&nbsp;h.
+::<math>P(X_\text{BV}<x)=P(X_\text{BV}\leq x-1)</math> bzw. <math>P(X_\text{BV}>x)=P(X_\text{BV}\geq x+1)</math>,
+:damit mit der Normalverteilung weitergerechnet werden kann.
+:Zum Beispiel: <math>P(X_\text{BV}<70) = P(X_\text{BV}\leq 69)</math>
+
+* Außerdem ist
+::<math> P(X_\text{BV} \leq x) = P(0 \leq X_\text{BV} \leq x) </math>
+::<math> P(X_\text{BV} \geq x) = P(x \leq X_\text{BV} \leq n) </math>
+::<math> P(X_\text{BV}   =  x) = P(x \leq X_\text{BV} \leq x) </math> (unbedingt mit Stetigkeitskorrektur)
+:und lässt sich somit durch die oben angegebene Formel berechnen.
+
+Der große Vorteil der Approximation liegt darin, dass sehr viele Stufen einer Binomialverteilung sehr schnell und einfach bestimmt werden können.
+
+=== Beziehung zur Cauchy-Verteilung ===
+Der [[Quotient]] von zwei stochastisch unabhängigen <math>\mathcal{N}(0,1)</math>-standardnormalverteilten Zufallsvariablen ist [[Cauchy-Verteilung|Cauchy-verteilt]].
+
+=== Beziehung zur Chi-Quadrat-Verteilung ===
+Das [[Quadrat (Mathematik)|Quadrat]] einer normalverteilten Zufallsvariablen hat eine [[Chi-Quadrat-Verteilung]] mit einem [[Freiheitsgrad (Statistik)|Freiheitsgrad]]. Also: Wenn <math>Z\sim\mathcal{N}(0,1)</math>, dann <math>Z^2\sim\chi^2(1)</math>. Weiterhin gilt: Wenn <math>\chi^2(r_1), \chi^2(r_2), \dotsc, \chi^2(r_n)</math> gemeinsam [[Stochastisch unabhängige Zufallsvariablen|stochastisch unabhängige]] Chi-Quadrat-verteilte Zufallsvariablen sind, dann gilt
+
+:<math>Y=\chi^2(r_1)+\chi^2(r_2)+\dotsb+\chi^2(r_n)\sim\chi^2(r_1+\dotsb+r_n)</math>.
+
+Daraus folgt mit unabhängig und standardnormalverteilten Zufallsvariablen <math>Z_1,Z_2,\dotsc,Z_n</math>:<ref>George G. Judge, R. Carter Hill, W. Griffiths, [[Helmut Lütkepohl]], T. C. Lee: ''Introduction to the Theory and Practice of Econometrics.'' 1988, S. 49.</ref>
+:<math>Y=Z_1^2+\dotsb+Z_n^2\sim\chi^2(n)</math>
+
+Weitere Beziehungen sind:
+
+* Die Summe <math>X_{n-1}=\frac{1}{\sigma^{2}}\sum_{i=1}^{n} (Z_{i}-\overline Z)^{2}</math> mit <math>\overline Z:=\frac{1}{n}\sum_{i=1}^{n} Z_i</math> und <math>n</math> unabhängigen normalverteilten Zufallsvariablen <math>Z_i\sim \mathcal{N}(\mu,\sigma^{2}), \;i=1, \dotsc, n</math> genügt einer Chi-Quadrat-Verteilung <math>X_{n-1}\sim\chi^2_{n-1}</math> mit <math>(n-1)</math> Freiheitsgraden.
+
+* Mit steigender Anzahl an Freiheitsgraden (''df'' ≫ 100) nähert sich die Chi-Quadrat-Verteilung der Normalverteilung an.
+
+* Die Chi-Quadrat-Verteilung wird zur [[Konfidenzintervall|Konfidenzschätzung]] für die Varianz einer normalverteilten Grundgesamtheit verwendet.
+
+=== Beziehung zur Rayleigh-Verteilung ===
+Der Betrag <math>Z = \sqrt{X^2 + Y^2}</math> zweier unabhängiger normalverteilter Zufallsvariablen <math>X, Y</math>, jeweils mit Mittelwert <math>\mu_X = \mu_Y = 0</math> und gleichen Varianzen <math>\sigma_X^2 = \sigma_Y^2 = \sigma^2</math>, ist [[Rayleigh-Verteilung|Rayleigh-verteilt]] mit Parameter <math>\sigma > 0</math>.
+
+=== Beziehung zur logarithmischen Normalverteilung ===
+Ist die Zufallsvariable <math>X</math> normalverteilt mit <math>\mathcal{N}(\mu,\sigma^{2})</math>, dann ist die Zufallsvariable <math>Y=e^{X}</math> [[Logarithmische Normalverteilung|logarithmisch-normalverteilt]], also <math>Y \sim \mathcal{LN}(\mu,\sigma^{2})</math>.
+
+Die Entstehung einer [[Logarithmische Normalverteilung|logarithmischen Normalverteilung]] ist auf multiplikatives, die einer Normalverteilung auf additives Zusammenwirken vieler Zufallsvariablen zurückführen.
+
+=== Beziehung zur F-Verteilung ===
+Wenn die stochastisch unabhängigen und identisch-normalverteilten Zufallsvariablen <math>X_1^{(1)}, X_2^{(1)}, \dotsc, X_n^{(1)}</math> und <math>X_1^{(2)}, X_2^{(2)}, \dotsc, X_n^{(2)}</math> die Parameter
+:<math>\operatorname E(X_{i}^{(1)})=\mu_{1}, \sqrt{\operatorname{Var}(X_{i}^{(1)})}=\sigma_{1}</math>
+:<math>\operatorname E(X_{i}^{(2)})=\mu_{2}, \sqrt{\operatorname{Var}(X_{i}^{(2)})}=\sigma_{2}</math>
+besitzen, dann unterliegt die Zufallsvariable
+:<math>Y_{n_{1}-1,n_{2}-1}:=\frac{\sigma_{2}(n_{2}-1)\sum\limits_{i=1}^{n_{1}}(X_{i}^{(1)}-\overline{{X}}^{(1)})^{2}}
+{\sigma_{1}(n_{1}-1)\sum\limits_{j=1}^{n_{2}}(X_{i}^{(2)}-\overline{{X}}^{(2)})^{2}}</math>
+einer [[F-Verteilung]] mit <math>((n_{1}-1,n_{2}-1))</math> Freiheitsgraden. Dabei sind
+:<math>\overline{X}^{(1)}=\frac{1}{n_{1}}\sum_{i=1}^{n_{1}}X_{i}^{(1)},\quad
+\overline{X}^{(2)}=\frac{1}{n_{2}}\sum_{i=1}^{n_{2}}X_{i}^{(2)}</math>.
+
+=== Beziehung zur studentschen t-Verteilung ===
+Wenn die unabhängigen Zufallsvariablen <math>X_1, X_2, \dotsc, X_n</math> identisch normalverteilt sind mit den Parametern <math>\mu</math> und <math>\sigma</math>, dann unterliegt die stetige Zufallsvariable
+:<math>Y_{n-1}=\frac{\overline{X}-\mu}{S/\sqrt{n}}</math>
+mit dem Stichprobenmittel <math>\overline{X}=\frac{1}{n}\sum_{i=1}^nX_i</math> und der Stichprobenvarianz <math>S^2=\frac 1{n-1}\sum_{i=1}^n(X_i-\overline{X})^2</math> einer [[Studentsche t-Verteilung|studentschen t-Verteilung]] mit <math>(n-1)</math> Freiheitsgraden.
+
+Für eine zunehmende Anzahl an Freiheitsgraden nähert sich die Student-t-Verteilung der Normalverteilung immer näher an. Als Faustregel gilt, dass man ab ca. <math>df > 30</math> die Student-t-Verteilung bei Bedarf durch die Normalverteilung approximieren kann.
+
+Die Student-t-Verteilung wird zur [[Konfidenzintervall|Konfidenzschätzung]] für den Erwartungswert einer normalverteilten Zufallsvariable bei unbekannter Varianz verwendet.
+
+== Rechnen mit der Standardnormalverteilung ==
+Bei Aufgabenstellungen, bei denen die Wahrscheinlichkeit für <math>\mu</math>-<math>{\sigma}^2</math>-normalverteilte Zufallsvariablen durch die Standardnormalverteilung ermittelt werden soll, ist es nicht nötig, die oben angegebene Transformation jedes Mal durchzurechnen. Stattdessen wird einfach die Transformation
+
+:<math>Z = \frac {X-\mu}{\sigma}</math>
+
+verwendet, um eine <math>\mathcal{N}(0,1)</math>-verteilte Zufallsvariable <math>Z</math> zu erzeugen.
+
+Die Wahrscheinlichkeit für das Ereignis, dass z.&nbsp;B. <math>X</math> im Intervall <math>[x,y]</math> liegt, ist durch folgende Umrechnung gleich einer Wahrscheinlichkeit der Standardnormalverteilung:
+
+:<math>
+\begin{align}
+ P(x \leq X \leq y) &= P\left(\frac {x-\mu}{\sigma} \leq \frac {X-\mu}{\sigma} \leq \frac {y-\mu}{\sigma}\right)\\
+ &=P\left(\frac {x-\mu}{\sigma} \leq Z \leq \frac {y-\mu}{\sigma}\right)\\
+ &=\Phi\left(\frac {y-\mu}{\sigma}\right)-\Phi\left(\frac {x-\mu}{\sigma}\right)
+\end{align}
+</math>.
+
+=== Grundlegende Fragestellungen ===
+Allgemein gibt die Verteilungsfunktion die Fläche unter der Glockenkurve bis zum Wert <math>x</math> an, d.&nbsp;h., es wird das [[bestimmtes Integral|bestimmte Integral]] von <math>-\infty</math> bis <math>x</math> berechnet.
+
+Dies entspricht in Aufgabenstellungen einer gesuchten [[Wahrscheinlichkeit]], bei der die Zufallsvariable <math>X</math> ''kleiner'' oder ''nicht größer'' als eine bestimmte Zahl <math>x</math> ist. Wegen der [[Stetigkeit]] der Normalverteilung macht es keinen Unterschied, ob nun <math><</math> oder <math>\leq</math> verlangt ist, weil z.&nbsp;B.
+:<math>P(X = 3) = \int_3^3 f(x)\mathrm dx = 0</math> und somit <math>P(X<3) = P(X \leq 3)</math>.
+Analoges gilt für „größer“ und „nicht kleiner“.
+
+Dadurch, dass <math>X</math> nur kleiner oder größer als eine Grenze sein (oder innerhalb oder außerhalb zweier Grenzen liegen) kann, ergeben sich für Aufgaben bei Wahrscheinlichkeitsberechnungen zu Normalverteilungen zwei grundlegende Fragestellungen:
+* Wie groß ist die Wahrscheinlichkeit, dass bei einem Zufallsexperiment die standardnormalverteilte Zufallsvariable <math>Z</math> ''höchstens'' den Wert <math>z</math> annimmt?
+*:<math>P(Z \leq z)=\Phi(z)</math>
+:In der [[Mathematikdidaktik|Schulmathematik]] wird für diese Aussage gelegentlich auch die Bezeichnung ''linker Spitz'' verwendet, da die [[Flächeninhalt|Fläche]] unter der Gaußkurve von links bis zur Grenze verläuft. Für <math>z</math> sind auch negative Werte erlaubt. Allerdings haben viele Tabellen der Standardnormalverteilung nur positive Einträge –&nbsp;wegen der Symmetrie der Kurve und der Negativitätsregel
+::<math>\Phi(-z)\ =\ 1-\Phi(z)</math>
+:des „linken Spitzes“ stellt dies aber keine Einschränkung dar.
+* Wie groß ist die Wahrscheinlichkeit, dass bei einem Zufallsexperiment die standardnormalverteilte Zufallsvariable <math>Z</math> ''mindestens'' den Wert <math>z</math> annimmt?
+::<math>P(Z \geq z) = 1 - \Phi(z)</math>
+:Hier wird gelegentlich die Bezeichnung ''rechter Spitz'' verwendet, mit
+::<math>P(Z \geq -z)= 1- \Phi(-z)= 1-(1-\Phi(z)) = \Phi(z)</math>
+:gibt es auch hier eine Negativitätsregel.
+
+Da jede Zufallsvariable <math>X</math> mit der allgemeinen Normalverteilung sich in die Zufallsvariable <math>Z = \frac{X -\mu}{\sigma}</math> mit der Standardnormalverteilung umwandeln lässt, gelten die Fragestellungen für beide Größen gleichbedeutend.
+
+=== Streubereich und Antistreubereich ===
+Häufig ist die Wahrscheinlichkeit für einen ''Streubereich'' von Interesse, d.&nbsp;h. die Wahrscheinlichkeit, dass die standardnormalverteilte Zufallsvariable <math>Z</math> Werte zwischen <math>z_1</math> und <math>z_2</math> annimmt:
+:<math>P(z_1 \le Z \le z_2) = \Phi(z_2) - \Phi(z_1)</math>
+
+Beim Sonderfall des symmetrischen Streubereiches (<math>z_1=-z_2</math>, mit <math>z_2>0</math>) gilt
+:<math>\begin{align}
+  P(-z\le Z\le z ) &= P (|Z|\le z)\\
+                   &= \Phi(z)-\Phi(-z)\\
+                   &= \Phi(z)-(1-\Phi(z))\\
+                   &= 2\Phi(z)-1.
+\end{align}</math>
+
+Für den entsprechenden ''Antistreubereich'' ergibt sich die Wahrscheinlichkeit, dass die standardnormalverteilte Zufallsvariable <math>Z</math> Werte außerhalb des Bereichs zwischen <math>z_1</math> und <math>z_2</math> annimmt, zu:
+:<math>P(Z\le z_1\text{ oder }Z\ge z_2) = \Phi(z_1) + (1-\Phi(z_2)).</math>
+
+Somit folgt bei einem symmetrischen Antistreubereich
+:<math>\begin{align}
+  P(Z\le -z\text{ oder }Z\ge z) &= P(|Z|\ge z)\\
+                                &=\Phi(-z)+1-\Phi(z)\\
+                                &= 1-\Phi(z)+1-\Phi(z)\\
+                                &=2-2 \Phi(z).
+\end{align}</math>
+
+=== Streubereiche am Beispiel der Qualitätssicherung ===
+Besondere Bedeutung haben beide Streubereiche z.&nbsp;B. bei der [[Qualitätssicherung]] von technischen oder wirtschaftlichen [[Produktion]]sprozessen. Hier gibt es einzuhaltende [[Toleranz (Technik)|Toleranzgrenzen]] <math>x_1</math> und <math>x_2</math>, wobei es meist einen größten noch akzeptablen Abstand <math>\epsilon</math> vom Erwartungswert <math>\mu</math> (=&nbsp;dem optimalen Sollwert) gibt. Die Standardabweichung <math>\sigma</math> kann hingegen [[empirisch]] aus dem Produktionsprozess gewonnen werden.
+
+Wurde <math>[x_1;x_2]=[\mu-\epsilon;\mu+\epsilon]</math> als einzuhaltendes Toleranzintervall angegeben, so liegt (je nach Fragestellung) ein symmetrischer Streu- oder Antistreubereich vor.
+
+Im Falle des Streubereiches gilt:
+:<math>\begin{align}
+ P(x_1 \leq X \leq x_2) &= P(|X-\mu|\leq\epsilon)\\
+ &= P(\mu-\epsilon \leq X \leq \mu+\epsilon)\\
+ &= P\left(\frac{-\epsilon}{\sigma} \leq Z \leq \frac{\epsilon}{\sigma}\right)\\
+ &= \Phi\left(\frac{\epsilon}{\sigma}\right)-\Phi\left(\frac{-\epsilon}{\sigma}\right)\\
+ &= 2 \Phi\left(\frac{\epsilon}{\sigma}\right)-1\\
+ &= \gamma.
+\end{align}</math>
+
+Der Antistreubereich ergibt sich dann aus
+:<math>P(|X-\mu|\geq \epsilon )= 1-\gamma</math>
+oder wenn kein Streubereich berechnet wurde durch
+:<math>P(|X-\mu|\geq \epsilon )=2\cdot\left(1-\Phi\left(\frac{\epsilon} {\sigma}\right)\right)=\alpha.</math>
+
+Das Ergebnis <math> \gamma </math> ist also die Wahrscheinlichkeit für verkaufbare Produkte, während <math> \alpha </math> die Wahrscheinlichkeit für Ausschuss bedeutet, wobei beides von den Vorgaben von <math> \mu </math>, <math> \sigma </math> und <math> \epsilon </math> abhängig ist.
+
+Ist bekannt, dass die maximale Abweichung <math> \epsilon </math> symmetrisch um den Erwartungswert liegt, so sind auch Fragestellungen möglich, bei denen die Wahrscheinlichkeit vorgegeben und eine der anderen Größen zu berechnen ist.
+
+== Testen auf Normalverteilung ==
+[[Datei:Quantile graph.svg|mini|300px|[[Quantil (Wahrscheinlichkeitstheorie)|Quantile]] einer Normalverteilung und einer [[Chi-Quadrat-Verteilung]]]]
+[[Datei:Anpassungstests.svg|mini|300px|Eine χ²-verteilte Zufallsvariable mit 5 Freiheitsgraden wird auf Normalverteilung getestet. Für jeden Stichprobenumfang werden 10.000 Stichproben simuliert und anschließend jeweils 5 Anpassungstests zu einem Niveau von 5 % durchgeführt.]]
+Um zu überprüfen, ob vorliegende Daten normalverteilt sind, können unter anderen folgende Methoden und Tests angewandt werden:
+* [[Chi-Quadrat-Test]]
+* [[Kolmogorow-Smirnow-Test]]
+* [[Anderson-Darling-Test]] (Modifikation des Kolmogorow-Smirnow-Tests)
+* [[Lilliefors-Test]] (Modifikation des Kolmogorow-Smirnow-Tests)
+* [[Cramér-von-Mises-Test]]
+* [[Shapiro-Wilk-Test]]
+* [[Jarque-Bera-Test]]
+* [[Q-Q-Plot]] (deskriptive Überprüfung)
+* [[Maximum-Likelihood-Methode]] (deskriptive Überprüfung)
+Die Tests haben unterschiedliche Eigenschaften hinsichtlich der Art der Abweichungen von der Normalverteilung, die sie erkennen. So erkennt der Kolmogorov-Smirnov-Test Abweichungen in der Mitte der Verteilung eher als Abweichungen an den Rändern, während der Jarque-Bera-Test ziemlich sensibel auf stark abweichende Einzelwerte an den Rändern („[[Heavy-tailed-Verteilung|heavy tails]]“) reagiert.
+
+Beim Lilliefors-Test muss im Gegensatz zum Kolmogorov-Smirnov-Test nicht standardisiert werden, d.&nbsp;h., <math>\mu</math> und <math>\sigma</math> der angenommenen Normalverteilung dürfen unbekannt sein.
+
+Mit Hilfe von [[Quantil-Quantil-Plot]]s (auch Normal-Quantil-Plots oder kurz Q-Q-Plots) ist eine einfache grafische Überprüfung auf Normalverteilung möglich.<br />Mit der Maximum-Likelihood-Methode können die Parameter <math>\mu</math> und <math>\sigma</math> der Normalverteilung geschätzt und die empirischen Daten mit der angepassten Normalverteilung grafisch verglichen werden.
+
+== Parameterschätzung, Konfidenzintervalle und Tests ==
+{{Hauptartikel|Normalverteilungsmodell}}
+Viele der statistischen Fragestellungen, in denen die Normalverteilung vorkommt, sind gut untersucht. Wichtigster Fall ist das sogenannte Normalverteilungsmodell, in dem man von der Durchführung von <math>n</math> unabhängigen und normalverteilten Versuchen ausgeht. Dabei treten drei Fälle auf:
+* der Erwartungswert ist unbekannt und die Varianz bekannt
+* die Varianz ist unbekannt und der Erwartungswert ist bekannt
+* Erwartungswert und Varianz sind unbekannt.
+
+Je nachdem, welcher dieser Fälle auftritt, ergeben sich verschiedene [[Schätzfunktion]]en, [[Konfidenzbereich]]e oder Tests. Diese sind detailliert im Hauptartikel Normalverteilungsmodell zusammengefasst.
+
+Dabei kommt den folgenden Schätzfunktionen eine besondere Bedeutung zu:
+* Das [[Stichprobenmittel]]
+::<math> \overline X =\frac{1}{n} \sum_{i=1}^n X_i </math>
+: ist ein [[Erwartungstreue|erwartungstreuer]] [[Punktschätzer|Schätzer]] für den unbekannten Erwartungswert sowohl für den Fall einer bekannten als auch einer unbekannten Varianz. Er ist sogar der [[Bester erwartungstreuer Schätzer|beste erwartungstreue Schätzer]], d.&nbsp;h. der Schätzer mit der kleinsten Varianz. Sowohl die [[Maximum-Likelihood-Methode]] als auch die [[Momentenmethode]] liefern das Stichprobenmittel als Schätzfunktion.
+* Die unkorrigierte [[Stichprobenvarianz (Schätzfunktion)|Stichprobenvarianz]]
+::<math>V(X)=\frac{1}{n} \sum_{i=1}^n (X_i - \mu_0)^2</math>.
+:ist ein erwartungstreuer Schätzer für die unbekannte Varianz bei gegebenem Erwartungswert <math>\mu_0 </math>. Auch sie kann sowohl aus der Maximum-Likelihood-Methode als auch aus der Momentenmethode gewonnen werden.
+* Die [[korrigierte Stichprobenvarianz]]
+::<math>V^*(X)=\frac{1}{n-1} \sum_{i=1}^n (X_i - \overline X)^2</math>.
+:ist ein erwartungstreuer Schätzer für die unbekannte Varianz bei unbekanntem Erwartungswert.
+
+== Erzeugung normalverteilter Zufallszahlen ==
+Alle folgenden Verfahren erzeugen standardnormalverteilte Zufallszahlen. Durch lineare Transformation lassen sich hieraus beliebige normalverteilte Zufallszahlen erzeugen: Ist die Zufallsvariable <math>x \sim \mathcal{N}(0,1)</math>-verteilt, so ist <math>a \cdot x + b</math> schließlich <math>\mathcal{N}(b,a^2)</math>-verteilt.
+
+=== Box-Muller-Methode ===
+Nach der [[Box-Muller-Methode]] lassen sich zwei unabhängige, standardnormalverteilte Zufallsvariablen <math>X</math> und <math>Y</math> aus zwei unabhängigen, [[Gleichverteilung|gleichverteilten]] Zufallsvariablen <math>U_1,U_2 \sim U(0,1)</math>, sogenannten [[Standardzufallszahl]]en, simulieren:
+
+:<math>X= \cos( 2 \pi U_1) \sqrt{-2\ln U_2}</math>
+
+und
+:<math>Y = \sin ( 2 \pi U_1 ) \sqrt{-2 \ln U_2}.</math>
+
+=== Polar-Methode ===
+{{Hauptartikel|Polar-Methode}}
+
+Die Polar-Methode von [[George Marsaglia]] ist auf einem Computer noch schneller, da sie keine Auswertungen von trigonometrischen Funktionen benötigt:
+
+# Erzeuge zwei voneinander unabhängige, im Intervall <math>[-1, 1]</math> gleichverteilte Zufallszahlen <math>u_1</math> und <math>u_2</math>
+# Berechne <math>q=u_1^2+u_2^2</math>. Falls <math>q = 0</math> oder <math>q \geq 1</math>, gehe zurück zu Schritt 1.
+# Berechne <math>p = \sqrt {\frac{-2 \cdot \ln q}{q}}</math>.
+# <math>x_i=u_i \cdot p</math> für <math>i=1,2</math> liefert zwei voneinander unabhängige, standardnormalverteilte Zufallszahlen <math>x_1</math> und <math>x_2</math>.
+<!--
+#Generiere zwei gleichverteilte Zufallsvariablen <math>u_1,u_2 = U(0,1)</math>
+#Berechne <math>v=(2u_1-1)^2+(2u_2-1)^2</math>. Falls <math>v \ge 1</math> wiederhole 1.
+#<math>x=(2u_1-1)(-2\log v /v)^{1/2}</math>
+-->
+
+=== Zwölferregel ===
+Der [[Zentraler Grenzwertsatz|zentrale Grenzwertsatz]] besagt, dass sich unter bestimmten Voraussetzungen die Verteilung der Summe [[Unabhängig identisch verteilte Zufallsvariablen|unabhängig, identisch verteilter Zufallszahlen]] einer Normalverteilung nähert.
+
+Ein Spezialfall ist die [[Zwölferregel]], die sich auf die Summe von zwölf Zufallszahlen aus einer Gleichverteilung auf dem Intervall [0,1] beschränkt und bereits zu passablen Verteilungen führt.
+
+Allerdings ist die geforderte Unabhängigkeit der zwölf Zufallsvariablen <math>X_i</math> bei den immer noch häufig verwendeten [[Kongruenzgenerator#Linearer Kongruenzgenerator|Linearen Kongruenzgeneratoren (LKG)]] nicht garantiert. Im Gegenteil wird vom [[Spektraltest]] für LKG meist nur die Unabhängigkeit von maximal vier bis sieben der <math>X_i</math> garantiert. Für numerische Simulationen ist die Zwölferregel daher sehr bedenklich und sollte, wenn überhaupt, dann ausschließlich mit aufwändigeren, aber besseren Pseudo-Zufallsgeneratoren wie z.&nbsp;B. dem [[Mersenne-Twister]] (Standard in [[Python (Programmiersprache)|Python]], [[GNU R]]) oder [[WELL]] genutzt werden. Andere, sogar leichter zu programmierende Verfahren, sind daher i.&nbsp;d.&nbsp;R. der Zwölferregel vorzuziehen.
+
+=== Verwerfungsmethode ===
+Normalverteilungen lassen sich mit der [[Verwerfungsmethode]] (siehe dort) simulieren.
+
+=== Inversionsmethode ===
+Die Normalverteilung lässt sich auch mit der [[Inversionsmethode]] berechnen.
+
+Da das [[Fehlerfunktion|Fehlerintegral]] nicht explizit mit elementaren Funktionen integrierbar ist, kann man auf Reihenentwicklungen der inversen Funktion für einen Startwert und anschließende Korrektur mit dem Newtonverfahren zurückgreifen. Dazu werden <math>\operatorname{erf}(x)</math> und <math>\operatorname{erfc}(x)</math> benötigt, die ihrerseits mit Reihenentwicklungen und Kettenbruchentwicklungen berechnet werden können – insgesamt ein relativ hoher Aufwand. Die notwendigen Entwicklungen sind in der Literatur zu finden.<ref>William B. Jones, W. J. Thron: ''Continued Fractions: Analytic Theory and Applications.'' Addison Wesley, 1980.</ref>
+
+Entwicklung des inversen Fehlerintegrals (wegen des Pols nur als Startwert für das Newtonverfahren verwendbar):
+:<math>\operatorname{erf}^{-1} \left(\frac 2 {\sqrt\pi} x\right) = x\Bigl(a_1 + x^2 \bigl(a_2 + x^2 (\dotsb)\bigr)\Bigr)</math>
+
+mit den Koeffizienten
+:<math>\begin{align}
+ a_i &=  1,
+  \tfrac 13,
+  \tfrac 7{30},
+  \tfrac {127}{630},
+  \tfrac {4369}{22680},
+  \tfrac {34807}{178200}, \dotsc
+\end{align}</math>
+
+== Anwendungen außerhalb der Wahrscheinlichkeitsrechnung ==
+Die Normalverteilung lässt sich auch zur Beschreibung nicht direkt stochastischer Sachverhalte verwenden, etwa in der [[Physik]] für das [[Amplitude]]nprofil der [[Gauß-Strahl]]en und andere Verteilungsprofile.
+
+Zudem findet sie Verwendung in der [[Gabor-Transformation]].
+
+== Siehe auch ==
+* [[Additives weißes gaußsches Rauschen]]
+* [[Lineare Regression]]
+
+== Literatur ==
+* Stephen M. Stigler: ''The history of statistics: the measurement of uncertainty before 1900.'' Belknap Series. Harvard University Press, 1986. ISBN 9780674403413.
+
+== Weblinks ==
+{{Commonscat|Normal distribution|Normalverteilung}}
+{{Wikibooks|Statistik: Normalverteilung|Anschauliche Darstellung der Normalverteilung}}
+* [http://matheguru.com/stochastik/normalverteilung.html Anschauliche Erklärung der Normalverteilung mit interaktivem Graphen]
+* {{Webarchiv | url=http://www.madeasy.de/2/gauss.htm | wayback=20180207233344 | text=Darstellung mit Programmcode}} in [[Visual Basic Classic]]
+* [http://www.elektro-energetika.cz/calculations/no.php?language=deutsch Online-Rechner Normalverteilung]
+
+== Einzelnachweise ==
+<references>
+
+<ref name="Götze 2002"> {{Literatur |Autor=Wolfgang Götze, Christel Deutschmann, Heike Link |Titel=Statistik. Lehr- und Übungsbuch mit Beispielen aus der Tourismus- und Verkehrswirtschaft |Verlag=Oldenburg |Ort=München |Datum=2002 |Seiten=170 |ISBN=3-486-27233-0 |Online={{Google Buch |BuchID=lRPnBQAAQBAJ |Seite=170}}}}</ref>
+
+</references>
+
+{{Navigationsleiste Wahrscheinlichkeitsverteilungen}}
+
+[[Kategorie:Absolutstetige Wahrscheinlichkeitsverteilung]]
+[[Kategorie:Univariate Wahrscheinlichkeitsverteilung]]
+[[Kategorie:Carl Friedrich Gauß als Namensgeber]]
