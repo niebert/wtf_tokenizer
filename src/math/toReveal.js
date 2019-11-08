@@ -12,15 +12,12 @@ const toHtml = function(c, options) {
     return `<div class="reference">⌃ ${c.data.encyclopedia}</div>`;
   }
   if (c.data.title) { //cite book, etc
-    let str = c.data.title + ", ";
+    let str = c.data.title;
     if (c.data.author) {
       str += c.data.author;
     }
     if (c.data.first && c.data.last) {
       str += c.data.first + ' ' + c.data.last;
-    }
-    if (c.data.year) {
-      str += ", "+c.data.year;
     }
     return `<div class="reference">⌃ ${str}</div>`;
   }

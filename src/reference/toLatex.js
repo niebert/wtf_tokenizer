@@ -1,7 +1,29 @@
+/*
+options = {
+  "parse": {
+    "math": true,
+    "citation": true
+  },
+  "output": {
+    "math": "...",
+    "citation": "cite"
+  }
+}
+*/
 
-//not so impressive right now
-const toLatex = function(c) {
-  let str = c.title();
-  return '⌃ ' + str + '\n';
+const toLatex = function(c,options) {
+  let out = "";
+  switch (options.output.citation) {
+    case "cite":
+      out = "\\cite{" + c.label() + "}";
+    break;
+    case "text":
+      out = "(" + c.first() + " " + c.last() + " " + c.year() + ")";
+    break;
+    default:
+      out = "\\cite{" + c.label() + "}";
+  }
+  return out;
 };
+
 module.exports = toLatex;

@@ -18,7 +18,8 @@ const citationTokenizer = require('./token4citation');
 const sd = require('./lib/setDefaults');
 const getParserOptions = sd.getParserOptions;
 // console.log("Require: '_version.js'");
-const version = require('./_version');
+//const version = require('../package.json').version;
+const version = require('./_version.js');
 //const parseDocument = require('./01-document/index.js');
 
 //the main 'factory' exported method
@@ -67,17 +68,28 @@ tokenizer.parse = function(wiki, data, options, cb) {
   */
   //return the parsed Wiki with the tokens
 
-tokenizer.text = function(text, data, options, cb) {
-  if (options.parse.math && options.parse.math == false) {
-    console.log("wtf_tokenize.math() was not called. options.parse.math=false");
+tokenizer.check_call = function (ptokenizer, parseid, text, data, options) {
+  if (options.parse[parseid] && options.parse[parseid] == false) {
+    console.log("wtf_tokenize." + parseid + "() was not called. options.parse." + parseid + "=false");
   } else {
-    text = mathTokenizer.text(text, data, options);
+    text = ptokenizer.parse(text, data, options);
+    console.log("wtf_tokenize." + parseid + "() was called.");
   }
-  if (options.parse.citation && options.parse.citation == false) {
-    console.log("wtf_tokenize.math() was not called. options.parse.math=false");
-  } else {
-    text = citationTokenizer.text(text, data, options);
+  return text;
+};
+
+tokenizer.parse = function(text, data, options, cb) {
+  /*
+  options = {
+    "parse": {
+      "math": true,
+      "citation": true
+    }
   }
+  */
+  // tokenize math and citations if options.parse-booleans are not set to false
+  text = this.check_call(mathTokenizer,"math",text, data, options);
+  text = this.check_call(citationTokenizer,"citation",text, data, options);
   if (cb) {
     text = cb(text, data, options);
   }
@@ -85,9 +97,11 @@ tokenizer.text = function(text, data, options, cb) {
 };
 
 tokenizer.html = function(text, data, options, cb) {
-  domain = domain || "wikipedia";
-  lang = lang || "en";
   return toHtml(lang,domain, options, cb);
+};
+
+tokenizer.reveal = function(text, data, options, cb) {
+  return toReveal(lang,domain, options, cb);
 };
 
 tokenizer.latex = function(text, data, options, cb) {
@@ -95,8 +109,6 @@ tokenizer.latex = function(text, data, options, cb) {
 };
 
 tokenizer.markdown = function(text, data, options, cb) {
-  domain = domain || "wikipedia";
-  lang = lang || "en"
   return toMarkdown(text, data, options, cb);
 };
 

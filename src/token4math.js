@@ -11,6 +11,14 @@ const tokenlib = require('./lib/tokenlib')
 const setTimeID = tokenlib.setTimeID;
 const replaceString = tokenlib.replaceString;
 
+const replaceMathNewLines = function (pMath) {
+  var vMath = " undefined mathematical expression in replaceMathNewLines()-call";
+  if (pMath) {
+    vMath = pMath.replace(/\n/g," ");
+  }
+  return vMath;
+}
+
 
 const tokenizeMathBlock = function(wikicode, data, options) {
   let timeid = data.timeid;
@@ -36,7 +44,7 @@ const tokenizeMathBlock = function(wikicode, data, options) {
       vCount++;
       console.log("Math Expression "+vCount+": '" + vResult[1] + "' found");
       vLabel = "___MATH_BLOCK_"+data.timeid+"_ID_"+vCount+"___";
-      var vFound = vResult[1];
+      var vFound = replaceMathNewLines(vResult[1]);
       data.mathexpr.push({
         "type":"block",
         "label":vLabel,
@@ -69,7 +77,7 @@ const tokenizeMathInline = function(wikicode, data, options) {
       vCount++;
       console.log("Math Expression "+vCount+": '" + vResult[1] + "' found");
       vLabel = "___MATH_INLINE_"+data.timeid+"_ID_"+vCount+"___";
-      var vFound = vResult[1];
+      var vFound = replaceMathNewLines(vResult[1]);
       data.mathexpr.push({
         "type":"inline",
         "label":vLabel,
@@ -84,6 +92,7 @@ const tokenizeMathInline = function(wikicode, data, options) {
 
 
 const tokenizeMath = function(wiki, data, options) {
+  console.log("CALL: tokenizeMath() - src/index.js:95 ");
   setTimeID(data);
   if (data.hasOwnProperty("mathexpr")) {
     console.log("data.mathexpr array exists");

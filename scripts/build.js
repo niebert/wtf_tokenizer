@@ -1,5 +1,6 @@
 var exec = require('shelljs').exec;
 var echo = require('shelljs').echo;
+var cp = require('shelljs').cp;
 var fs = require('fs');
 var browserify = './node_modules/.bin/browserify';
 var derequire = './node_modules/.bin/derequire';
@@ -56,3 +57,5 @@ require('./filesize');
 
 //.. then we replace original package.json file
 exec('mv ./package.json.backup ./package.json ');
+echo("Copy wtf_tokenizer.js to docs/");
+cp('./builds/wtf_tokenizer.js', './docs/js');
