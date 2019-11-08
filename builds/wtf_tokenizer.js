@@ -1,4 +1,4 @@
-/* wtf_tokenizer v2.0.0
+/* wtf_tokenizer v2.0.1
    github.com/niebert/wtf_tokenizer
 
    Tokenize mathematical expressions and citations in Wiki markdown from MediaWiki
@@ -1887,7 +1887,7 @@ module.exports = {
 },{}],10:[function(_dereq_,module,exports){
 "use strict";
 
-module.exports = '2.0.0';
+module.exports = '2.0.1';
 
 },{}],11:[function(_dereq_,module,exports){
 "use strict";

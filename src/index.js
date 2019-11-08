@@ -117,6 +117,6 @@ tokenizer.json = function(text, data, options, cb) {
 };
 
 tokenizer.version = version;
-console.log("wtf_tokenize - version " + version + "is loaded");
+console.log("wtf_tokenize - version " + version + " is loaded!");
 
 module.exports = tokenizer;
