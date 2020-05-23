@@ -22,25 +22,17 @@ const getParserOptions = sd.getParserOptions;
 const version = require('./_version.js');
 //const parseDocument = require('./01-document/index.js');
 
-//the main 'factory' exported method
+//the main 'factory' exported method is encode_wiki
 const tokenizer = function(wiki, data, options) {
-  return parseDocument(wiki, data, options);
+  return encode_wiki(wiki, data, options);
 };
 
 
-tokenizer.math = require("./token4math.js");
-tokenizer.citation = require("./token4citation.js");
+const tokenizer_math = require("./token4math.js");
+const tokenizer_citation = require("./token4citation.js");
 
-tokenizer.parse = function(wiki, data, options, cb) {
-  var parsed_wiki = parseDocument(wiki, data, options);
-  if (cb) {
-    // execute callback function
-    wiki = cb(wiki, data, options);
-  }
-  data.wiki = wiki;
-  return parseWiki(wiki, data, options, cb);
-};
-
+tokenizer.math = tokenizer_math.encode;
+tokenizer.citation = tokenizer_citation.encode;
   /*
   options = {
     "wiki": "Wiki Content",
@@ -68,7 +60,7 @@ tokenizer.parse = function(wiki, data, options, cb) {
   */
   //return the parsed Wiki with the tokens
 
-tokenizer.check_call = function (ptokenizer, parseid, text, data, options) {
+tokenizer.call_encode4id = function (ptokenizer, parseid, text, data, options) {
   if (options) {
     console.log("check_call() - options defined");
     if (options.tokenize.hasOwnProperty(parseid)) {
@@ -85,16 +77,16 @@ tokenizer.check_call = function (ptokenizer, parseid, text, data, options) {
       }
     };
   }
-  if (options.tokenize[parseid] && options.tokenize[parseid] && options.tokenize[parseid] == false) {
+  if (options.tokenize && options.tokenize[parseid] && options.tokenize[parseid] && options.tokenize[parseid] == false) {
     console.log("wtf_tokenize." + parseid + "() was not called. options.parse." + parseid + "=false");
   } else {
-    text = ptokenizer.parse(text, data, options);
+    text = this[parseid](text, data, options);
     console.log("wtf_tokenize." + parseid + "() was called.");
   }
   return text;
 };
 
-tokenizer.encode = function(doc, options, cb) {
+const encode = function(doc, options, cb) {
   var text = doc.wiki || " undefined wiki source ";
   /*
   options = {
@@ -105,8 +97,8 @@ tokenizer.encode = function(doc, options, cb) {
   }
   */
   // tokenize math and citations if options.parse-booleans are not set to false
-  text = this.check_call(mathTokenizer,"math",text, data, options);
-  text = this.check_call(citationTokenizer,"citation",text, data, options);
+  text = this.call_encode4id("math",text, data, options);
+  text = this.call_encode4id("citation",text, data, options);
   if (cb) {
     text = cb(text, data, options);
   }
@@ -134,6 +126,6 @@ tokenizer.json = function(text, data, options, cb) {
 };
 
 tokenizer.version = version;
-console.log("wtf_tokenize - version " + version + " is loaded!");
+console.log("wtf_tokenizer - version " + version + " is loaded!");
 
 module.exports = tokenizer;

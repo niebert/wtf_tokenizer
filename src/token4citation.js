@@ -30,7 +30,7 @@ const Reference = require('./reference/Reference');
 //return only rendered text of wiki links
 const resolve_links = function(line) {
   // categories, images, files
-  line = line.replace(cat_reg, '');
+  //line = line.replace(cat_reg, '');
   // [[Common links]]
   line = line.replace(/\[\[:?([^|]{1,80}?)\]\](\w{0,5})/g, '$1$2');
   // [[File:with|Size]]
@@ -49,7 +49,7 @@ const resolve_links = function(line) {
 
 function postprocess(line) {
   //fix links
-  line = resolve_links(line);
+  // line = resolve_links(line);
   //remove empty parentheses (sometimes caused by removing templates)
   line = line.replace(/\([,;: ]*\)/g, '');
   //these semi-colons in parentheses are particularly troublesome
@@ -66,12 +66,14 @@ function parseSentence(str) {
   };
   //pull-out the [[links]]
   // parseLinks() - 04-sentence/links.js
+  /*
   let links = parseLinks(str);
   if (links) {
     obj.links = links;
   }
+  */
   //pull-out the bolds and ''italics''
-  obj = parseFmt(obj);
+  //obj = parseFmt(obj);
   //pull-out things like {{start date|...}}
   // obj = templates(obj);
   return new Sentence(obj);
@@ -94,38 +96,38 @@ const parseCitation = function(tmpl) {
 
 //handle unstructured ones - <ref>some text</ref>
 const parseInline = function(str) {
-  let obj = parseSentence(str) || {};
   return {
     template: 'citation',
     type: 'inline',
     data: {},
-    inline: obj
+    inline: str
   };
 };
 
 // parse <ref></ref> xml tags
 const tokenizeCitation = function(wiki, data, options) {
-  if (options && options.parse && options.parse.citations && options.parse.citations == false) {
-    console.log("tokenize citations was not performed - options.parse.citations=false");
-    wiki = tokenizeRefs(wiki, data, options);
+  setTimeID(data);
+  if (options && options.tokenize && options.tokenize.citations && options.tokenize.citations == false) {
+    console.log("tokenize citations was not performed - options.tokenize.citation=false");
+    //wiki = tokenizeRefs(wiki, data, options);
   } else {
     console.log("tokenize citations performed");
     wiki = tokenizeRefs(wiki, data, options);
   }
-  return wiki
-}
+  return wiki;
+};
 
 const name2label = function (pname) {
   //replace blank and non characters or digits by underscore "_"
-  var vLabel = str.replace(/[^A-Za-z0-9]/g,"_");
+  var vLabel = pname.replace(/[^A-Za-z0-9]/g,"_");
   vLabel = vLabel.replace(/[_]+/g,"_");
   vLabel = vLabel.replace(/^_/g,"");
   vLabel = vLabel.replace(/_$/g,"");
   if (vLabel == "") {
     vLabel = null;
-  };
-  return vLabel
-}
+  }
+  return vLabel;
+};
 
 const getCiteLabel = function (data,pid) {
   //replace blank and non characters or digits by underscore "_"
@@ -133,6 +135,7 @@ const getCiteLabel = function (data,pid) {
 }
 
 const storeReference = function (wiki,data,references,tmpl,pLabel) {
+  console.log("storeReference: '" + tmpl + "'");
   if (hasCitation(tmpl)) {
     let obj = parseCitation(tmpl);
     if (obj) {
@@ -254,7 +257,7 @@ const toJSON = function(pjson, data, options) {
 }
 
 let CitationTokenizer = {
-  "parse": tokenizeCitation,
+  "encode": tokenizeCitation,
   "text": toText,
   "html": toHtml,
   "latex": toLatex,

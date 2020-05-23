@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
 <html><head>
-   <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+
+   <meta charset="UTF-8">
    <meta http-equiv="author" content="Engelbert Niehaus (admin)">
    <meta http-equiv="last-modification" content="23.4.2004 (9:35)">
    <meta http-equiv="content-language" content="de">
@@ -8,6 +10,7 @@
    <script language="javascript" src="js/wtf_fetch.js"></script>
    <script language="javascript" src="js/wtf_tokenizer.js"></script>
 <script language="javascript">
+var wiki_source = "undefined Wiki Source text!";
 var data = {}
 
 /*
@@ -38,6 +41,21 @@ data = {
 
 if (wtf_tokenizer) {
   console.log("wtf_tokenizer exists in index.html");
+  for (var variable in wtf_tokenizer) {
+    if (wtf_tokenizer.hasOwnProperty(variable)) {
+      console.log("wtf_tokenizer." + variable +"() method exists in index.html - Type: '"+typeof(wtf_tokenizer[variable])+"'");
+    }
+  }
+  if (wtf_tokenizer.math) {
+    console.log("wtf_tokenizer.math() method exists in index.html");
+  } else {
+    console.error("wtf_tokenizer.math() method is missing in index.html");
+  }
+  if (wtf_tokenizer.citation) {
+    console.log("wtf_tokenizer.citation() method exists in index.html");
+  } else {
+    console.error("wtf_tokenizer.citation() method is missing in index.html");
+  }
 } else {
   console.error("wtf_tokenizer is missing in index.html");
 }
@@ -138,6 +156,7 @@ function callWikiSource() {
     // doc contains the download
     //alert(JSON.stringify(doc.wiki))
     el("tWikiSource").value = doc.wiki;
+    wiki_source = doc.wiki;
     if (info_exists(doc.wiki) == "NO") {
       el("tWikiSource").value = doc.wiki + append_source_info();
     }
@@ -145,8 +164,8 @@ function callWikiSource() {
   });
 };
 
-function reset_data(data) {
-
+function reset_data() {
+  el("tWikiSource").value = wiki_source;
   data = {};
 }
 
@@ -154,15 +173,19 @@ function tokenize_math() {
   console.log("CALL: tokenize_math() in index.html");
   var wiki_src = el("tWikiSource").value;
   if (wtf_tokenizer.math) {
-    console.log("CALL: wtf_tokenizer.math(wiki_src)");
+    console.log("CALL: wtf_tokenizer.math(wiki_src, data, options, cb)");
     var options = {
 
     };
     var cb = null; // Callback function undefined
     var options = {
-
+      "tokenize": {
+        "math":     true,
+        "citation": false
+      }
     };
-    el("tWikiSource").value = wtf_tokenizer.parse(wiki_src, data, options, cb);
+    el("tWikiSource").value = wtf_tokenizer.math(wiki_src, data, options, cb);
+    el("tOutputJSON").value = JSON.stringify(data,null,4);
   } else {
     console.error("ERROR: wtf_tokenizer.math() is undefined");
   }
@@ -171,8 +194,22 @@ function tokenize_math() {
 function tokenize_citation() {
   console.log("CALL: tokenize_citation() in index.html");
   var wiki_src = el("tWikiSource").value;
-  el("tWikiSource").value = wtf_tokenizer.citation(wiki_src);
+  if (wtf_tokenizer.citation) {
+    console.log("CALL: wtf_tokenizer.citation(wiki_src, data, options, cb)");
+    var options = {
+      "tokenize": {
+        "math":     false,
+        "citation": true
+      }
+    };
+    var cb = null; // Callback function undefined
+    el("tWikiSource").value = wtf_tokenizer.citation(wiki_src, data, options, cb);
+    el("tOutputJSON").value = JSON.stringify(data,null,4);
+} else {
+    console.error("ERROR: wtf_tokenizer.citation() is undefined");
+  }
 }
+
 </script>
 
 
@@ -286,7 +323,7 @@ function tokenize_citation() {
     <td>
       <input type="button" id="bTokenizeMath" value="Tokenize Math" onclick="tokenize_math()" style="background-color: red;color: white">
       <input type="button" id="bTokenizeCitation" value="Tokenize Citation" onclick="tokenize_citation()" style="background-color: red;color: white">
-      <input type="button" id="bWikiSource" value="Reset Data" onclick="reset_data(data)" style="color:blue">
+      <input type="button" id="bWikiSource" value="Reset Data" onclick="reset_data()" style="color:blue">
     </td>
   </tr>
   <tr style="display:none">
@@ -300,7 +337,7 @@ function tokenize_citation() {
 </table>
 <hr>
 <form name="fconvert">
-<textarea name="wikisource" id="tWikiSource" cols="125" rows="20">This is a
+<textarea name="wikisource" id="tWikiSource" cols="125" rows="15">This is a
 Text1 [[linkname]] with links of different types. Text2 [[linkname|linktext]] with image [[File:myimage.png]].
 :<math> \sum_{k=1}^{n} k^2</math>
 Link to further information <math>\mathbb{R}^2</math> looks like {{Further|Ebola virus epidemic in Sierra Leone}} in the wiki source.
@@ -364,7 +401,7 @@ Sei <math>X</math> eine beliebige Menge. Eine [https://de.wikipedia.org/wiki/Fun
 [[Datei:Audio8 metrik dreiecksungleichung.ogg|mini]]
 
 == Nicht-Negativität ==
-Aus den drei Eigenschaften der Metrik folgt die Nicht-Negativität, d.h. für alle <math>x,y \in X</math> gilt. <math>d(x,y)\geq0</math>. Die Nicht-Negativität folgt aus den anderen Eigenschaften mit:
+Aus den drei Eigenschaften der Metrik folgt die Nicht-Negativität, d.h. für alle <math>x,y \in X</math> gilt. <math>d(x,y)\geq 0</math>. Die Nicht-Negativität folgt aus den anderen Eigenschaften mit:
 
 :<math>0 = \frac{1}{2} d(x, x) \leq \frac{1}{2}(d(x, y) + d(y, x)) = </math>
 <math>= \frac{1}{2}(d(x, y) + d(y, x)) = \frac{1}{2}(d(x, y) + d(x, y)) = d(x, y).</math>
@@ -448,6 +485,10 @@ Der '''[https://niebert.github.io/Wiki2Reveal/index.html?domain=wikiversity&titl
 <references/>
 
 </textarea><br>
+<hr>
+<b>JSON:</b><br>
+<textarea name="outputjson" id="tOutputJSON" cols="125" rows="15">
+</textarea>
 </form>
 <center style="font-size: 10px;">
   <a href="https://www.github.com/niebert/wtf_tokenizer" target="_blank">wtf_tokenizer GitHub Sources</a> - <a href="https://github.com/niebert/wtf_tokenizer/archive/master.zip"  target="_blank">Download ZIP</a>
@@ -458,4 +499,7 @@ Der '''[https://niebert.github.io/Wiki2Reveal/index.html?domain=wikiversity&titl
 
 
 </center>
+<script type="text/javascript">
+  wiki_source = el("tWikiSource").value;
+</script>
 </body></html>

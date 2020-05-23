@@ -29,7 +29,14 @@ const keyValue = function(tmpl, isInfobox) {
       if (isInfobox) {
         h[key] = val; //.json();
       } else {
-        h[key] = val.text();
+        if (val.text) {
+          console.log("Type of val.text='" +  typeof(val.text) + "'");
+          //h[key] = val.text();
+          h[key] = "undefined text() call for key='" + key + "' val="+JSON.stringify(val,null,4);
+        } else {
+          console.log("Type of val.text undefined");
+
+        }
         if (val.links().length > 0) {
           h._links = h._links || [];
           h._links = h._links.concat(val.links());

@@ -43,7 +43,7 @@ const tokenizeMathBlock = function(wikicode, data, options) {
     while (vResult = vSearch.exec(wikicode)) {
       vCount++;
       console.log("Math Expression "+vCount+": '" + vResult[1] + "' found");
-      vLabel = "___MATH_BLOCK_"+data.timeid+"_ID_"+vCount+"___";
+      vLabel = "___MATH_BLOCK_"+data.timeid+"_"+vCount+"___";
       var vFound = replaceMathNewLines(vResult[1]);
       data.mathexpr.push({
         "type":"block",
@@ -76,7 +76,7 @@ const tokenizeMathInline = function(wikicode, data, options) {
     while (vResult = vSearch.exec(wikicode)) {
       vCount++;
       console.log("Math Expression "+vCount+": '" + vResult[1] + "' found");
-      vLabel = "___MATH_INLINE_"+data.timeid+"_ID_"+vCount+"___";
+      vLabel = "___MATH_INLINE_"+data.timeid+"_"+vCount+"___";
       var vFound = replaceMathNewLines(vResult[1]);
       data.mathexpr.push({
         "type":"inline",
@@ -131,7 +131,7 @@ const toJSON = function(pjson, data, options) {
 }
 
 let MathTokenizer = {
-  "parse": tokenizeMath,
+  "encode": tokenizeMath,
   "text": toText,
   "html": toHtml,
   "latex": toLatex,

@@ -1,4 +1,4 @@
-/* wtf_tokenizer v2.0.2
+/* wtf_tokenizer v2.0.3
    github.com/niebert/wtf_tokenizer
 
    Tokenize mathematical expressions and citations in Wiki markdown from MediaWiki
@@ -1887,7 +1887,7 @@ module.exports = {
 },{}],10:[function(_dereq_,module,exports){
 "use strict";
 
-module.exports = '2.0.2';
+module.exports = '2.0.3';
 
 },{}],11:[function(_dereq_,module,exports){
 "use strict";
@@ -1918,27 +1918,19 @@ var getParserOptions = sd.getParserOptions; // console.log("Require: '_version.j
 //const version = require('../package.json').version;
 
 var version = _dereq_('./_version.js'); //const parseDocument = require('./01-document/index.js');
-//the main 'factory' exported method
+//the main 'factory' exported method is encode_wiki
 
 
 var tokenizer = function tokenizer(wiki, data, options) {
-  return parseDocument(wiki, data, options);
+  return encode_wiki(wiki, data, options);
 };
 
-tokenizer.math = _dereq_("./token4math.js");
-tokenizer.citation = _dereq_("./token4citation.js");
+var tokenizer_math = _dereq_("./token4math.js");
 
-tokenizer.parse = function (wiki, data, options, cb) {
-  var parsed_wiki = parseDocument(wiki, data, options);
+var tokenizer_citation = _dereq_("./token4citation.js");
 
-  if (cb) {
-    // execute callback function
-    wiki = cb(wiki, data, options);
-  }
-
-  data.wiki = wiki;
-  return parseWiki(wiki, data, options, cb);
-};
+tokenizer.math = tokenizer_math.encode;
+tokenizer.citation = tokenizer_citation.encode;
 /*
 options = {
   "wiki": "Wiki Content",
@@ -1964,30 +1956,49 @@ options = {
 */
 //return the parsed Wiki with the tokens
 
+tokenizer.call_encode4id = function (ptokenizer, parseid, text, data, options) {
+  if (options) {
+    console.log("check_call() - options defined");
 
-tokenizer.check_call = function (ptokenizer, parseid, text, data, options) {
-  if (options.parse[parseid] && options.parse[parseid] == false) {
+    if (options.tokenize.hasOwnProperty(parseid)) {
+      console.log("check_call() - options.tokenize." + parseid + " defined");
+    } else {
+      options.tokenize[parseid] = true;
+    }
+  } else {
+    console.warning("check_call() - options undefined");
+    options = {
+      "tokenize": {
+        "math": true,
+        "citation": true
+      }
+    };
+  }
+
+  if (options.tokenize && options.tokenize[parseid] && options.tokenize[parseid] && options.tokenize[parseid] == false) {
     console.log("wtf_tokenize." + parseid + "() was not called. options.parse." + parseid + "=false");
   } else {
-    text = ptokenizer.parse(text, data, options);
+    text = this[parseid](text, data, options);
     console.log("wtf_tokenize." + parseid + "() was called.");
   }
 
   return text;
 };
 
-tokenizer.parse = function (text, data, options, cb) {
+var encode = function encode(doc, options, cb) {
+  var text = doc.wiki || " undefined wiki source ";
   /*
   options = {
-    "parse": {
+    "tokenize": {
       "math": true,
       "citation": true
     }
   }
   */
   // tokenize math and citations if options.parse-booleans are not set to false
-  text = this.check_call(mathTokenizer, "math", text, data, options);
-  text = this.check_call(citationTokenizer, "citation", text, data, options);
+
+  text = this.call_encode4id("math", text, data, options);
+  text = this.call_encode4id("citation", text, data, options);
 
   if (cb) {
     text = cb(text, data, options);
@@ -2017,7 +2028,7 @@ tokenizer.json = function (text, data, options, cb) {
 };
 
 tokenizer.version = version;
-console.log("wtf_tokenize - version " + version + " is loaded!");
+console.log("wtf_tokenizer - version " + version + " is loaded!");
 module.exports = tokenizer;
 
 },{"./_version.js":10,"./lib/parseWiki":13,"./lib/setDefaults":14,"./token4citation":29,"./token4citation.js":29,"./token4math":30,"./token4math.js":30}],12:[function(_dereq_,module,exports){
@@ -2582,6 +2593,8 @@ module.exports = grabInside;
 },{"./_strip":19}],22:[function(_dereq_,module,exports){
 "use strict";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 // console.log("load oneSentence() parser in 'keyValue.js'");
 var parseSentence = _dereq_('../04-sentence').oneSentence;
 
@@ -2622,7 +2635,13 @@ var keyValue = function keyValue(tmpl, isInfobox) {
       if (isInfobox) {
         h[key] = val; //.json();
       } else {
-        h[key] = val.text();
+        if (val.text) {
+          console.log("Type of val.text='" + _typeof(val.text) + "'"); //h[key] = val.text();
+
+          h[key] = "undefined text() call for key='" + key + "' val=" + JSON.stringify(val, null, 4);
+        } else {
+          console.log("Type of val.text undefined");
+        }
 
         if (val.links().length > 0) {
           h._links = h._links || [];
@@ -2916,8 +2935,8 @@ var Reference = _dereq_('./reference/Reference'); // console.log("Require '/refe
 
 var resolve_links = function resolve_links(line) {
   // categories, images, files
-  line = line.replace(cat_reg, ''); // [[Common links]]
-
+  //line = line.replace(cat_reg, '');
+  // [[Common links]]
   line = line.replace(/\[\[:?([^|]{1,80}?)\]\](\w{0,5})/g, '$1$2'); // [[File:with|Size]]
 
   line = line.replace(/\[\[File:(.{2,80}?)\|([^\]]+?)\]\](\w{0,5})/g, ''); // [[Replaced|Links]]
@@ -2931,8 +2950,8 @@ var resolve_links = function resolve_links(line) {
 
 function postprocess(line) {
   //fix links
-  line = resolve_links(line); //remove empty parentheses (sometimes caused by removing templates)
-
+  // line = resolve_links(line);
+  //remove empty parentheses (sometimes caused by removing templates)
   line = line.replace(/\([,;: ]*\)/g, ''); //these semi-colons in parentheses are particularly troublesome
 
   line = line.replace(/\( *(; ?)+/g, '('); //dangling punctuation
@@ -2948,14 +2967,15 @@ function parseSentence(str) {
   }; //pull-out the [[links]]
   // parseLinks() - 04-sentence/links.js
 
-  var links = parseLinks(str);
-
+  /*
+  let links = parseLinks(str);
   if (links) {
     obj.links = links;
-  } //pull-out the bolds and ''italics''
-
-
-  obj = parseFmt(obj); //pull-out things like {{start date|...}}
+  }
+  */
+  //pull-out the bolds and ''italics''
+  //obj = parseFmt(obj);
+  //pull-out things like {{start date|...}}
   // obj = templates(obj);
 
   return new Sentence(obj);
@@ -2980,20 +3000,20 @@ var parseCitation = function parseCitation(tmpl) {
 
 
 var parseInline = function parseInline(str) {
-  var obj = parseSentence(str) || {};
   return {
     template: 'citation',
     type: 'inline',
     data: {},
-    inline: obj
+    inline: str
   };
 }; // parse <ref></ref> xml tags
 
 
 var tokenizeCitation = function tokenizeCitation(wiki, data, options) {
-  if (options && options.parse && options.parse.citations && options.parse.citations == false) {
-    console.log("tokenize citations was not performed - options.parse.citations=false");
-    wiki = tokenizeRefs(wiki, data, options);
+  setTimeID(data);
+
+  if (options && options.tokenize && options.tokenize.citations && options.tokenize.citations == false) {
+    console.log("tokenize citations was not performed - options.tokenize.citation=false"); //wiki = tokenizeRefs(wiki, data, options);
   } else {
     console.log("tokenize citations performed");
     wiki = tokenizeRefs(wiki, data, options);
@@ -3004,7 +3024,7 @@ var tokenizeCitation = function tokenizeCitation(wiki, data, options) {
 
 var name2label = function name2label(pname) {
   //replace blank and non characters or digits by underscore "_"
-  var vLabel = str.replace(/[^A-Za-z0-9]/g, "_");
+  var vLabel = pname.replace(/[^A-Za-z0-9]/g, "_");
   vLabel = vLabel.replace(/[_]+/g, "_");
   vLabel = vLabel.replace(/^_/g, "");
   vLabel = vLabel.replace(/_$/g, "");
@@ -3013,7 +3033,6 @@ var name2label = function name2label(pname) {
     vLabel = null;
   }
 
-  ;
   return vLabel;
 };
 
@@ -3023,6 +3042,8 @@ var getCiteLabel = function getCiteLabel(data, pid) {
 };
 
 var storeReference = function storeReference(wiki, data, references, tmpl, pLabel) {
+  console.log("storeReference: '" + tmpl + "'");
+
   if (hasCitation(tmpl)) {
     var obj = parseCitation(tmpl);
 
@@ -3159,7 +3180,7 @@ var toJSON = function toJSON(pjson, data, options) {
 };
 
 var CitationTokenizer = {
-  "parse": tokenizeCitation,
+  "encode": tokenizeCitation,
   "text": toText,
   "html": toHtml,
   "latex": toLatex,
@@ -3218,7 +3239,7 @@ var tokenizeMathBlock = function tokenizeMathBlock(wikicode, data, options) {
     while (vResult = vSearch.exec(wikicode)) {
       vCount++;
       console.log("Math Expression " + vCount + ": '" + vResult[1] + "' found");
-      vLabel = "___MATH_BLOCK_" + data.timeid + "_ID_" + vCount + "___";
+      vLabel = "___MATH_BLOCK_" + data.timeid + "_" + vCount + "___";
       var vFound = replaceMathNewLines(vResult[1]);
       data.mathexpr.push({
         "type": "block",
@@ -3255,7 +3276,7 @@ var tokenizeMathInline = function tokenizeMathInline(wikicode, data, options) {
     while (vResult = vSearch.exec(wikicode)) {
       vCount++;
       console.log("Math Expression " + vCount + ": '" + vResult[1] + "' found");
-      vLabel = "___MATH_INLINE_" + data.timeid + "_ID_" + vCount + "___";
+      vLabel = "___MATH_INLINE_" + data.timeid + "_" + vCount + "___";
       var vFound = replaceMathNewLines(vResult[1]);
       data.mathexpr.push({
         "type": "inline",
@@ -3314,7 +3335,7 @@ var toJSON = function toJSON(pjson, data, options) {
 };
 
 var MathTokenizer = {
-  "parse": tokenizeMath,
+  "encode": tokenizeMath,
   "text": toText,
   "html": toHtml,
   "latex": toLatex,

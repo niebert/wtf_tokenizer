@@ -1,5 +1,5 @@
 # Tokenizer for Wiki Transformation Framework - WTF
-Tokenizer replaces document elements with tokens and stores the parsed content elements in a JSON. The library `wtf_tokenizer` was designed to work together with the great Wiki Markdown parser `wtf_wikipedia` developed by [Spencer Kelly](https://github.com/spencermountain). Without his work this library would not exist.
+Tokenizer replaces document elements with tokens and stores the parsed content elements in a JSON. The library `wtf_tokenizer` was designed to work together with the great Wiki Markdown parser [`wtf_wikipedia`](https://github.com/spencermountain/wtf_wikipedia) developed by [Spencer Kelly](https://github.com/spencermountain). Without his work for [`wtf_wikipedia`](https://github.com/spencermountain/wtf_wikipedia) this library `wtf_tokenizer` would not exist.
 The tokenizer may be implemented based on the description of micro libraries for [`wtf_tokenizer`](https://github.com/spencermountain/wtf_wikipedia/wiki/Micro-Libraries-wtf_fetch,-....) as part of the `Wiki Transformation Framework` (WTF).
 
 ## Tokenize Wiki Markdown
@@ -16,9 +16,9 @@ text before the mathematical expression <MATH>\sum_{i=1}^{\infty} [x_i]
 ```
 Tokenizing with the `encode()`-call for mathematical expressions will create the following content as output.
 ```
-text before the mathematical expression ___MATH_INLINE_7238234792_ID_5___ text after math.
+text before the mathematical expression ___MATH_INLINE_7238234792_5___ text after math.
 ```
-`ID_5` represents the 5th mathematical expression found in the Wiki markdown source text.
+After the time index `7238234792` the enumeration ID `5` represents the 5th mathematical expression found in the Wiki markdown source text.
 
 
 ### Citations and References
@@ -41,8 +41,8 @@ cite an already defined reference with <ref name="MyLabel"/> text after citation
 ```
 into
 ```
-text before math ___MATH_INLINE_7238234792_ID_5___ text after math.
-text before ___CITE_7238234792_ID_3___ and text after    
+text before math ___MATH_INLINE_7238234792_5___ text after math.
+text before ___CITE_7238234792_3___ and text after    
 cite an already defined reference with ___CITE_7238234792_MyLabel___ text after citation.
 ```
 The challenge of parsing can be identified in the mathematical expression. The colon `:` in the first column of the line defines an indentation. But within a mathematical expression it is just a devision.
@@ -54,7 +54,7 @@ For further processing e.g. with the [`wtf_wikipedia` library](https://github.co
 If you want to generate different output formats with `wtf_wikipedia` (e.g. `HTML`, `LaTeX`, `Markdown`, ...)
 the tokens/markers can be replaced in the appropriate syntax by calling a detokenizer/decoder during post processing the generated output from other Wiki Transformation Framework tools like [`wtf_wikipedia`](https://github.com/spencermountain/wtf_wikipedia) or [`Wiki2Reveal`](https://niebert.github.io/Wiki2Reveal). When the output is generated with `wtf_wikipedia.html()` or `wtf_wikipedia.markdown()`, then call because during output the final numbering of citations can be generated, if more that on articles are downloaded and aggregated.
 
-So it makes sense, that the markers/tokens remain even in the JSON sentences, sections and paragraphs until the final output is generated. By `wtf_tokenizer` the corresponding data of the tokenizer will populate the `doc.references` in the same way as `wtf_wikipedia` but in addition `wtf_wikipedia` the label for backwards replacment in the output was appended to the records for any tokens. E.g. the record for the corresponding label (e.g. `___CITE_7238234792_ID_3___` or `___MATH_INLINE_7238234792_ID_5___` will also be stored for all references and mathematical expressions. This concept will allow that, that later on the markers for citations can be replaced by `[6]` in the IEEE citation style. If you want a decoding of tokens for citations in APA-Style, you will able to replace that e.g. by `(Kelly 2018)` with the call  of `wtf_tokenizer.text()` or `wtf_tokenizer.html()`. The same would be performed for mathematical inline and block expressions, they need the original location of the mathematical expression e.g. in sentence (e.g. `___MATH_INLINE_7238234792_ID_5___`).
+So it makes sense, that the markers/tokens remain even in the JSON sentences, sections and paragraphs until the final output is generated. By `wtf_tokenizer` the corresponding data of the tokenizer will populate the `doc.references` in the same way as `wtf_wikipedia` but in addition `wtf_wikipedia` the label for backwards replacment in the output was appended to the records for any tokens. E.g. the record for the corresponding label (e.g. `___CITE_7238234792_3___` or `___MATH_INLINE_7238234792_5___` will also be stored for all references and mathematical expressions. This concept will allow that, that later on the markers for citations can be replaced by `[6]` in the IEEE citation style. If you want a decoding of tokens for citations in APA-Style, you will able to replace that e.g. by `(Kelly 2018)` with the call  of `wtf_tokenizer.text()` or `wtf_tokenizer.html()`. The same would be performed for mathematical inline and block expressions, they need the original location of the mathematical expression e.g. in sentence (e.g. `___MATH_INLINE_7238234792_5___`).
 
 This needs the introduction of `wtf_tokenizer.json()` method will not replace any content in the output of the JSON-file. The replacement can be implemented if you want that to be performed in a specific use-case of your application.
 
@@ -81,44 +81,11 @@ Furthermore it must be mentioned that mathematical expression have different ren
 * **Step 4:** `wtf_tokenizer`
   * **Input:**
     * string in the export format, text with tokenized citations and mathematical expressions
-  * **Output:**  detokenized export format in the `out` string is injected in the DeTokenizer w.g.`wtf_tokenizer.html(out,data,options)`. In this case the output strint `out` is already in the HTML format. In the output `out` or in any other desired output format (e.g. `markdown`) the token replacement is performed e.g. for HTML the mathematical expressions are exported to MathJax and e.g. for latex the detokenizer replaces the word/token `MATH-INLINE-839832492834_N12` by `$\sum_{n=0}^{\infty} \frac{x^n}{n!}$`.
-
-It seems that the only step is, that the constructors for the AST treenode e.g. `Reference`, `MathFormula`, .... should be extendable with additional export formats e.g. `doc.reveal()` that visits the AST tree nodes `Section`, `Paragraph`, `Sentence`, ....  and calls the appropriate `toReveal()` function for the node.
-Might be sufficient to add it the following way:
-
-```javascript
-Document.reveal = function () {
-   ....
-};
-
-Document.Section.reveal = function () {
-   ....
-};
-
-Document.Section.Paragraph.reveal = function () {
-   ....
-};
-...
+  * **Output:**  detokenized export format in the `out` string is injected in the DeTokenizer w.g.`wtf_tokenizer.html(out,data,options)`. In this case the output strint `out` is already in the HTML format. In the output `out` or in any other desired output format (e.g. `markdown`) the token replacement is performed e.g. for HTML the mathematical expressions are exported to MathJax and e.g. for latex the detokenizer replaces the word/token `___MATH_INLINE-839832492834_12___` by `$\sum_{n=0}^{\infty} \frac{x^n}{n!}$`.
+  The tokenizer can replace the tokens of type
 ```
-`Section` might own different constructors for tree nodes of the AST (Abstract Syntax Tree), so
-```javascript
-Document.Section.Table.reveal = function () {
-   ....
-};
-```
-resp. assigned to paragraph level.
-```javascript
-Document.Section.Paragraph.Table.reveal = function () {
-   ....
-};
-```
-
-
-
-are replaced by tokens of type
-```
-   ___MATH_INLINE_793249879_ID_5___
-   ___MATH_BLOCK_793249879_ID_6___
+   ___MATH_INLINE_793249879_5___
+   ___MATH_BLOCK_793249879_6___
 ```
   and pushes the latex code of mathematical expressions in the JSON data
 * Citations reference with a name
@@ -127,14 +94,16 @@ are replaced by tokens of type
 ```
 are replaced by
 ```
-   ___CITE_LABEL_my_citation___
+   ___CITE_LABEL_793249879_my_citation___
 ```
-Use `wtf_fetch` as a submodule of wikipedia markup parser `wtf_wikipedia` to tokenize
+Use `wtf_fetch` to fetch Wiki markdown from wikipedia or Wikiversity and the apply  `wtf_tokenizer` to tokenize
 * Citations or
 * Mathematical expression
-with a unique identifier  the Wiki markdown source. `wtf_wikipedia` developed by <a href="https://spencermountain.github.io/">Spencer Kelly</a> and <a href="https://github.com/spencermountain/wtf_wikipedia/graphs/contributors"> can be used to contributors </a>
+with a unique identifier in the Wiki markdown source. `wtf_wikipedia` developed by <a href="https://spencermountain.github.io/" target="SpenceGithub">Spencer Kelly</a> and <a href="https://github.com/spencermountain/wtf_wikipedia/graphs/contributors"  target="ContributorsGithub>contributors</a> can be used to generate output or the tokenizer can be used in [Wiki2Reveal](https://niebert.github.io/Wiki2Reveal)
 
-`wtf_wikipedia` turns wikipedia's markup language into `JSON`, so extracting the content of a MediaWiki source as JSON data by parsing the wiki markup.
+`wtf_wikipedia` turns wikipedia's markup language into `JSON` while [`Wiki2Reveal`](https://niebert.github.io/Wiki2Reveal) creates a [RevealJS presentation](https://revealjs.com) from the Wiki Markup source. In both use-cases of the `wtf_tokenizer` support you in handling the citations and mathematical expressions before parsing the content of a MediaWiki source. After  [`Wiki2Reveal`](https://niebert.github.io/Wiki2Reveal) or
+
+
 
 
 
@@ -240,9 +209,9 @@ You can just copy the library `wtf_tokenizer` with a script tag or just add the 
 # What it does:
 * Assume you have downloaded the Wiki source code with `wtf_fetch` downloads Wiki markup source for an article from a MediaWiki of the Wiki Foundation
 * Allows different MediaWiki source, e.g. Wikipedia, Wikiversity, Wikivoyage, ...
-* Creates a JSON with the following format stored as example in variable `wiki_json`:
+* Creates a JSON with the following format stored as example in JSON with the attributes for the fetch page in  `data`. The JSON may look like this:
 ```javascript
-var wiki_json = {
+var data = {
   "wiki": "This is the content of the wiki article in wiki markdown ..."
   "title": "Swarm Intelligence",
   "lang": "en",
@@ -251,9 +220,9 @@ var wiki_json = {
   "pageid": 2130123
 }
 ```
-If you want to access the Wiki markdown of the fetch article, access the `wiki_json.wiki`. The language and domain is stored in the JSON for the article because the attributes are helpful to expand relative links in the wiki to absolute links, that work also after having the document available on a other domain.
+If you want to access the Wiki markdown of the fetch article, access the `data.wiki`. The language and domain is stored in the JSON for the article because the attributes are helpful to expand relative links in the wiki to absolute links, that work also after having the document available on a other domain.
 
-## Processing MediaWiki Markdown
+## Processing MediaWiki Markdown with `wtf_tokenizer`
 
 The fetched wiki markdown e.g. from Wikipedia is in general processed within the browser or in the NodeJS application.
 
