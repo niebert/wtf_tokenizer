@@ -1,7 +1,7 @@
 {
   "name": "wtf_tokenizer",
   "description": "Tokenize mathematical expressions and citations in Wiki markdown from MediaWiki",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "Based on Work of Spencer Kelly <spencermountain@gmail.com> ",
   "repository": {
     "type": "git",
