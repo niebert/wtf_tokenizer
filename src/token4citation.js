@@ -8,6 +8,8 @@
      by
      ___CITE_LABEL_my_citation___
 */
+
+
 const tokenlib = require('./lib/tokenlib')
 // console.log("Require 'src/lib/tokenlib.js' loaded in 'token4citation.js'!");
 const helpers = require('./lib/helpers');
@@ -102,8 +104,14 @@ const parseInline = function(str) {
 };
 
 // parse <ref></ref> xml tags
-const tokenizeCitation = function(wiki, data) {
-  wiki = tokenizeRefs(wiki, data);
+const tokenizeCitation = function(wiki, data, options) {
+  if (options && options.parse && options.parse.citations && options.parse.citations == false) {
+    console.log("tokenize citations was not performed - options.parse.citations=false");
+    wiki = tokenizeRefs(wiki, data, options);
+  } else {
+    console.log("tokenize citations performed");
+    wiki = tokenizeRefs(wiki, data, options);
+  }
   return wiki
 }
 
@@ -143,7 +151,7 @@ const storeReference = function (wiki,data,references,tmpl,pLabel) {
 
 const tokenizeRefs = function(wiki, data, options) {
   let references = [];
-  // (1) References without a citaion label
+  // (1) References without a citation label
   wiki = wiki.replace(/ ?<ref>([\s\S]{0,1000}?)<\/ref> ?/gi, function(a, tmpl){
     // getCiteLabel(data,pid) returns  ___CITE_8234987294_5___
     let vLabel = getCiteLabel(data,references.length);
@@ -152,12 +160,12 @@ const tokenizeRefs = function(wiki, data, options) {
   });
   // (2) Cite a reference by a label WITHOUT reference
   // replace <ref name="my book label"/> by "___CITE_7238234792_my_book_label___"
-  wiki = wiki.replace(/ ?<ref[\s]+name=["']([^"'])["'][^>]{0,200}?\/> ?/gi,function(a, tmpl) {
+  wiki = wiki.replace(/ ?<ref[\s]+name=["']([^"']+)["'][^>]{0,200}?\/> ?/gi,function(a, tmpl) {
     let vLabel = getCiteLabel(data,name2label(tmpl));
     return vLabel;
   });
   // (3) Reference with citation label that is used multiple time in a document by (2)
-  wiki = wiki.replace(/ ?<ref [\s]+name=["']([^"'])["'][^>]{0,200}?>([\s\S]{0,1000}?)<\/ref> ?/gi, function(a, name, tmpl) {
+  wiki = wiki.replace(/ ?<ref[\s]+name=["']([^"']+)["'][^>]{0,200}?>([\s\S]{0,1000}?)<\/ref> ?/gi, function(a, name, tmpl) {
     /* difference between name, label and cite label
        (3a) name='my book name#2012'
        (3b) label='my_book_name_2012'

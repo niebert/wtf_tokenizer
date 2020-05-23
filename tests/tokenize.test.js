@@ -19,7 +19,7 @@ test('tokenize-as-promise', t => {
 test('tokenize-as-callback', t => {
   t.plan(1);
   wtf_fetch.getPage('Tony Danza', 'en', 'wikipedia',  {
-    'Api-User-Agent': 'wtf_fetch forked test script - <spencermountain@gmail.com>'
+    'Api-User-Agent': 'wtf_tokenizer forked test script - <spencermountain@gmail.com>'
   }, function(err, doc) {
     if (err) {
       t.throw(err);
@@ -31,7 +31,7 @@ test('tokenize-as-callback', t => {
 test('tokenize-invalid', t => {
   t.plan(1);
   var p = wtf_fetch.getPage('Taylor%20Swift', 'en', 'wikipedia',  {
-    'Api-User-Agent': 'wtf_fetch forked test script - <spencermountain@gmail.com>'
+    'Api-User-Agent': 'wtf_tokenizer forked test script - <spencermountain@gmail.com>'
   });
   p.then(function(doc) {
     t.ok(doc === null, 'invalid character query returns null');
@@ -44,7 +44,7 @@ test('tokenize-invalid', t => {
 test('tokenize-missing', t => {
   t.plan(1);
   var p = wtf_fetch.getPage('NonExistentPage', 'en', 'wikipedia',  {
-    'Api-User-Agent': 'wtf_fetch forked test script - <spencermountain@gmail.com>'
+    'Api-User-Agent': 'wtf_tokenizer forked test script - <spencermountain@gmail.com>'
   });
   p.then(function(doc) {
     t.ok(doc === null, 'tokenizeing non-existent page returns null');
@@ -58,7 +58,7 @@ test('tokenize-redirect', t => {
   t.plan(1);
   var p = wtf_fetch.getPage('USA', 'simple', {
     follow_redirects: false,
-    'Api-User-Agent': 'wtf_fetch forked test script - <spencermountain@gmail.com>'
+    'Api-User-Agent': 'wtf_tokenizer forked test script - <spencermountain@gmail.com>'
   });
   p.then(function(doc) {
     t.ok(doc.wiki.indexOf("REDIRECT")>0, 'got unfollowed redirect');
@@ -87,7 +87,7 @@ test('random', t => {
   t.plan(1);
   var p = wtf.random('simple', 'simple', {
     follow_redirects: false,
-    'Api-User-Agent': 'wtf_fetch forked test script - <spencermountain@gmail.com>'
+    'Api-User-Agent': 'wtf_tokenizer forked test script - <spencermountain@gmail.com>'
   });
   p.then(function(doc) {
     t.ok(doc.wiki.length>0, 'got random document');
@@ -102,7 +102,7 @@ test('random', t => {
 test('category', t => {
   t.plan(1);
   var p = wtf.category('Category:Basketball teams in Toronto', {
-    'Api-User-Agent': 'wtf_fetch forked test script - <spencermountain@gmail.com>'
+    'Api-User-Agent': 'wtf_tokenizer forked test script - <spencermountain@gmail.com>'
   });
   p.then(function(res) {
     t.ok(res.pages.length > 2, 'got some pages');

@@ -10,6 +10,31 @@
 <script language="javascript">
 var data = {}
 
+/*
+options = {
+  "wiki": "Wiki Content",
+  "title": "Wiki Title",
+  "lang": "en",
+  "domain": "wikipedia"
+}
+
+data = {
+  "mathexp": [
+    {
+      "type":"block",
+      "label": "___MATH_BLOCK_78294924792_ID_1___",
+      "math": "\\sum_{k=1}^{n} k^2"
+    },
+    {
+      "type":"inline",
+      "label": "___MATH_BLOCK_78294924792_ID_2___",
+      "math": "\\sin(x^2) + \\cos(y^2)"
+    }
+
+  ]
+}
+}
+*/
 
 if (wtf_tokenizer) {
   console.log("wtf_tokenizer exists in index.html");
@@ -121,6 +146,7 @@ function callWikiSource() {
 };
 
 function reset_data(data) {
+
   data = {};
 }
 
@@ -129,7 +155,14 @@ function tokenize_math() {
   var wiki_src = el("tWikiSource").value;
   if (wtf_tokenizer.math) {
     console.log("CALL: wtf_tokenizer.math(wiki_src)");
-    el("tWikiSource").value = wtf_tokenizer.math(wiki_src);
+    var options = {
+
+    };
+    var cb = null; // Callback function undefined
+    var options = {
+
+    };
+    el("tWikiSource").value = wtf_tokenizer.parse(wiki_src, data, options, cb);
   } else {
     console.error("ERROR: wtf_tokenizer.math() is undefined");
   }

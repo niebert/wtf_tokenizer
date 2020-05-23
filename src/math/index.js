@@ -3,37 +3,47 @@ const parsePipe = require('../templates/misc')['cite gnis'];
 const parseSentence = require('../04-sentence').oneSentence;
 const MathFormula = require('./MathFormula');
 
-//structured Cite templates - <ref>{{Cite..</ref>
-const hasCitation = function(str) {
-  return /^ *?\{\{ *?(cite|citation)/i.test(str) && /\}\} *?$/.test(str) && /citation needed/i.test(str) === false;
+//structured Cite templates - <math>{{Cite..</math>
+const hasTemplate = function(str) {
+  return /^ *?\{\{ *?(mathtpl)/i.test(str) && /\}\} *?$/.test(str) && /citation needed/i.test(str) === false;
 };
 
 //might as well parse it, since we're here.
-const parseCitation = function(tmpl) {
+const parseTemplate = function(tmpl) {
   let obj = parseGeneric(tmpl);
   if (obj) {
     return obj;
   }
-  //support {{cite gnis|98734}} format
+  //support {{mathtpl myvec|x}} format
   return parsePipe(tmpl);
 };
 
-//handle unstructured ones - <ref>some text</ref>
+//handle unstructured ones - <math>some text</math>
 const parseInline = function(str) {
   let obj = parseSentence(str) || {};
   return {
-    template: 'citation',
+    template: 'no_tpl',
     type: 'inline',
     data: {},
     inline: obj
   };
 };
 
-// parse <ref></ref> xml tags
-const parseRefs = function(wiki, data) {
+const parseBlock = function(str) {
+  let obj = parseSentence(str) || {};
+  return {
+    template: 'no_tpl',
+    type: 'block',
+    data: {},
+    inline: obj
+  };
+};
+
+// parse <math></math> xml tags
+const parseMath = function(wiki, data) {
   let references = [];
-  wiki = wiki.replace(/ ?<ref>([\s\S]{0,1000}?)<\/ref> ?/gi, function(a, tmpl) {
-    if (hasCitation(tmpl)) {
+  wiki = wiki.replace(/ ?<math>([\s\S]{0,1000}?)<\/math> ?/gi, function(a, tmpl) {
+    if (hasTemplate(tmpl)) {
       let obj = parseCitation(tmpl);
       if (obj) {
         references.push(obj);
@@ -44,11 +54,11 @@ const parseRefs = function(wiki, data) {
     }
     return ' ';
   });
-  // <ref name=""/>
-  wiki = wiki.replace(/ ?<ref [^>]{0,200}?\/> ?/gi, ' ');
-  // <ref name=""></ref>
-  wiki = wiki.replace(/ ?<ref [^>]{0,200}?>([\s\S]{0,1000}?)<\/ref> ?/gi, function(a, tmpl) {
-    if (hasCitation(tmpl)) {
+  // <math name=""/>
+  wiki = wiki.replace(/ ?<math [^>]{0,200}?\/> ?/gi, ' ');
+  // <math name=""></math>
+  wiki = wiki.replace(/ ?<math [^>]{0,200}?>([\s\S]{0,1000}?)<\/math> ?/gi, function(a, tmpl) {
+    if (hasTemplate(tmpl)) {
       let obj = parseCitation(tmpl);
       if (obj) {
         references.push(obj);
@@ -64,4 +74,4 @@ const parseRefs = function(wiki, data) {
   data.references = references.map(r => new Reference(r));
   return wiki;
 };
-module.exports = parseRefs;
+module.exports = parseMath;

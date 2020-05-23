@@ -1,4 +1,4 @@
-/* wtf_tokenizer v2.0.1
+/* wtf_tokenizer v2.0.2
    github.com/niebert/wtf_tokenizer
 
    Tokenize mathematical expressions and citations in Wiki markdown from MediaWiki
@@ -1887,7 +1887,7 @@ module.exports = {
 },{}],10:[function(_dereq_,module,exports){
 "use strict";
 
-module.exports = '2.0.1';
+module.exports = '2.0.2';
 
 },{}],11:[function(_dereq_,module,exports){
 "use strict";
@@ -2017,7 +2017,7 @@ tokenizer.json = function (text, data, options, cb) {
 };
 
 tokenizer.version = version;
-console.log("wtf_tokenize - version " + version + "is loaded");
+console.log("wtf_tokenize - version " + version + " is loaded!");
 module.exports = tokenizer;
 
 },{"./_version.js":10,"./lib/parseWiki":13,"./lib/setDefaults":14,"./token4citation":29,"./token4citation.js":29,"./token4math":30,"./token4math.js":30}],12:[function(_dereq_,module,exports){
@@ -2050,6 +2050,61 @@ module.exports = helpers;
 
 },{}],13:[function(_dereq_,module,exports){
 "use strict";
+
+// dumpster-dive throws everything into mongodb  - github.com/spencermountain/dumpster-dive
+// mongo has some opinions about what characters are allowed as keys and ids.
+//https://stackoverflow.com/questions/12397118/mongodb-dot-in-key-name/30254815#30254815
+var specialChar = /[\\\.$]/;
+
+var encodeStr = function encodeStr(str) {
+  if (typeof str !== 'string') {
+    str = '';
+  }
+
+  str = str.replace(/\\/g, '\\\\');
+  str = str.replace(/^\$/, "\\u0024");
+  str = str.replace(/\./g, "\\u002e");
+  return str;
+};
+
+var encodeObj = function encodeObj() {
+  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var keys = Object.keys(obj);
+
+  for (var i = 0; i < keys.length; i += 1) {
+    if (specialChar.test(keys[i]) === true) {
+      var str = encodeStr(keys[i]);
+
+      if (str !== keys[i]) {
+        obj[str] = obj[keys[i]];
+        delete obj[keys[i]];
+      }
+    }
+  }
+
+  return obj;
+};
+
+var parseWiki = function parseWiki(wiki, title, lang, domain, options, cb) {
+  var vReturn = {
+    "title": title,
+    "lang": lang,
+    "domain": domain,
+    "options": options,
+    "mathexpr": {},
+    "citation": {},
+    "reference": {}
+  };
+  return;
+};
+/*
+module.exports = {
+  encodeObj: encodeObj
+}
+*/
+
+
+module.exports = parseWiki;
 
 },{}],14:[function(_dereq_,module,exports){
 "use strict";
@@ -2935,8 +2990,15 @@ var parseInline = function parseInline(str) {
 }; // parse <ref></ref> xml tags
 
 
-var tokenizeCitation = function tokenizeCitation(wiki, data) {
-  wiki = tokenizeRefs(wiki, data);
+var tokenizeCitation = function tokenizeCitation(wiki, data, options) {
+  if (options && options.parse && options.parse.citations && options.parse.citations == false) {
+    console.log("tokenize citations was not performed - options.parse.citations=false");
+    wiki = tokenizeRefs(wiki, data, options);
+  } else {
+    console.log("tokenize citations performed");
+    wiki = tokenizeRefs(wiki, data, options);
+  }
+
   return wiki;
 };
 
@@ -2983,7 +3045,7 @@ var storeReference = function storeReference(wiki, data, references, tmpl, pLabe
 };
 
 var tokenizeRefs = function tokenizeRefs(wiki, data, options) {
-  var references = []; // (1) References without a citaion label
+  var references = []; // (1) References without a citation label
 
   wiki = wiki.replace(/ ?<ref>([\s\S]{0,1000}?)<\/ref> ?/gi, function (a, tmpl) {
     // getCiteLabel(data,pid) returns  ___CITE_8234987294_5___
@@ -2993,12 +3055,12 @@ var tokenizeRefs = function tokenizeRefs(wiki, data, options) {
   }); // (2) Cite a reference by a label WITHOUT reference
   // replace <ref name="my book label"/> by "___CITE_7238234792_my_book_label___"
 
-  wiki = wiki.replace(/ ?<ref[\s]+name=["']([^"'])["'][^>]{0,200}?\/> ?/gi, function (a, tmpl) {
+  wiki = wiki.replace(/ ?<ref[\s]+name=["']([^"']+)["'][^>]{0,200}?\/> ?/gi, function (a, tmpl) {
     var vLabel = getCiteLabel(data, name2label(tmpl));
     return vLabel;
   }); // (3) Reference with citation label that is used multiple time in a document by (2)
 
-  wiki = wiki.replace(/ ?<ref [\s]+name=["']([^"'])["'][^>]{0,200}?>([\s\S]{0,1000}?)<\/ref> ?/gi, function (a, name, tmpl) {
+  wiki = wiki.replace(/ ?<ref[\s]+name=["']([^"']+)["'][^>]{0,200}?>([\s\S]{0,1000}?)<\/ref> ?/gi, function (a, name, tmpl) {
     /* difference between name, label and cite label
        (3a) name='my book name#2012'
        (3b) label='my_book_name_2012'

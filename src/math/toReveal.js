@@ -1,6 +1,6 @@
 
 //
-const toHtml = function(c, options) {
+const toReveal = function(c, options) {
   if (c.data && c.data.url && c.data.title) {
     let str = c.data.title;
     if (options.links === true) {
@@ -26,4 +26,4 @@ const toHtml = function(c, options) {
   }
   return '';
 };
-module.exports = toHtml;
+module.exports = toReveal;

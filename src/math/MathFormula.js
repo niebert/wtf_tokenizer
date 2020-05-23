@@ -1,6 +1,7 @@
 const setDefaults = require('../lib/setDefaults');
 const toLatex = require('./toLatex');
 const toHtml = require('./toHtml');
+const toReveal = require('./toReveal');
 const toMarkdown = require('./toJson');
 const toJson = require('./toJson');
 const defaults = {};
@@ -42,6 +43,10 @@ const methods = {
     options = setDefaults(options, defaults);
     return toHtml(this, options);
   },
+  reveal: function(options) {
+    options = setDefaults(options, defaults);
+    return toReveal(this, options);
+  },
   latex: function(options) {
     options = setDefaults(options, defaults);
     return toLatex(this, options);
@@ -52,6 +57,6 @@ const methods = {
   }
 };
 Object.keys(methods).forEach((k) => {
-  Reference.prototype[k] = methods[k];
+  MathFormula.prototype[k] = methods[k];
 });
-module.exports = Reference;
+module.exports = MathFormula;

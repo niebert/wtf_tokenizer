@@ -69,7 +69,23 @@ tokenizer.parse = function(wiki, data, options, cb) {
   //return the parsed Wiki with the tokens
 
 tokenizer.check_call = function (ptokenizer, parseid, text, data, options) {
-  if (options.parse[parseid] && options.parse[parseid] == false) {
+  if (options) {
+    console.log("check_call() - options defined");
+    if (options.tokenize.hasOwnProperty(parseid)) {
+      console.log("check_call() - options.tokenize."+parseid+" defined");
+    } else {
+      options.tokenize[parseid] = true;
+    }
+  } else {
+    console.warning("check_call() - options undefined");
+    options = {
+      "tokenize" : {
+        "math": true,
+        "citation": true
+      }
+    };
+  }
+  if (options.tokenize[parseid] && options.tokenize[parseid] && options.tokenize[parseid] == false) {
     console.log("wtf_tokenize." + parseid + "() was not called. options.parse." + parseid + "=false");
   } else {
     text = ptokenizer.parse(text, data, options);
@@ -78,10 +94,11 @@ tokenizer.check_call = function (ptokenizer, parseid, text, data, options) {
   return text;
 };
 
-tokenizer.parse = function(text, data, options, cb) {
+tokenizer.encode = function(doc, options, cb) {
+  var text = doc.wiki || " undefined wiki source ";
   /*
   options = {
-    "parse": {
+    "tokenize": {
       "math": true,
       "citation": true
     }
