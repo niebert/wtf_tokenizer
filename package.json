@@ -45,7 +45,7 @@
     "amble": "0.0.7",
     "babelify": "10.0.0",
     "browserify": "^16.5.1",
-    "codecov": ">=3.6.5",
+    "codecov": ">=3.7.1",
     "derequire": "2.1.0",
     "minimist": ">=1.2.3",
     "nyc": "^15.0.1",
