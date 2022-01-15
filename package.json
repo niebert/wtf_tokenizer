@@ -49,7 +49,7 @@
     "derequire": "2.1.0",
     "minimist": ">=1.2.3",
     "nyc": "^15.0.1",
-    "shelljs": "0.8.3",
+    "shelljs": "0.8.5",
     "tap-dancer": "0.1.2",
     "tap-spec": "5.0.0",
     "tape": "4.9.1",
