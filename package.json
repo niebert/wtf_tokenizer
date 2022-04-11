@@ -47,7 +47,7 @@
     "browserify": "^16.5.1",
     "codecov": ">=3.6.5",
     "derequire": "2.1.0",
-    "minimist": ">=1.2.3",
+    "minimist": ">=1.2.6",
     "nyc": "^15.0.1",
     "shelljs": "0.8.3",
     "tap-dancer": "0.1.2",
